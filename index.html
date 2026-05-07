@@ -603,6 +603,108 @@
   .fade-up:nth-child(3) { animation-delay: 0.4s; }
   .fade-up:nth-child(4) { animation-delay: 0.55s; }
 
+  /* TECH STACK MARQUEE — fills the hero -> portfolio transition */
+  .marquee {
+    background: var(--green);
+    color: var(--off-white);
+    padding: 22px 0;
+    overflow: hidden;
+    position: relative;
+    border-top: 2px solid var(--green-bright);
+    border-bottom: 2px solid var(--green-bright);
+  }
+  .marquee::before,
+  .marquee::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .marquee::before {
+    left: 0;
+    background: linear-gradient(to right, var(--green), transparent);
+  }
+  .marquee::after {
+    right: 0;
+    background: linear-gradient(to left, var(--green), transparent);
+  }
+  .marquee-track {
+    display: inline-flex;
+    gap: 36px;
+    white-space: nowrap;
+    animation: marquee 60s linear infinite;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    will-change: transform;
+  }
+  .marquee-track span { color: var(--off-white); font-weight: 400; }
+  .marquee-track em {
+    color: var(--green-bright);
+    font-style: normal;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* PORTFOLIO INTRO — oversized italic watermark numeral */
+  .portfolio-intro { position: relative; overflow: hidden; }
+  .portfolio-intro::before {
+    content: '08';
+    position: absolute;
+    top: 60px;
+    right: 48px;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(140px, 18vw, 260px);
+    font-weight: 700;
+    font-style: italic;
+    color: rgba(105, 190, 40, 0.07);
+    line-height: 1;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .portfolio-intro > * { position: relative; z-index: 1; }
+
+  /* ABOUT — accent dot grid behind copy */
+  .about-section { position: relative; overflow: hidden; }
+  .about-section::before {
+    content: '';
+    position: absolute;
+    top: 80px;
+    right: -40px;
+    width: 320px;
+    height: 320px;
+    background-image: radial-gradient(circle, var(--green-bright) 1.2px, transparent 1.5px);
+    background-size: 22px 22px;
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .about-section > * { position: relative; z-index: 1; }
+
+  /* CTA — italic arrow accent */
+  .cta-section { position: relative; overflow: hidden; }
+  .cta-section::after {
+    content: '→';
+    position: absolute;
+    bottom: 60px;
+    left: 48px;
+    font-family: 'Playfair Display', serif;
+    font-size: 110px;
+    color: var(--green-bright);
+    opacity: 0.13;
+    font-style: italic;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .cta-section > * { position: relative; z-index: 1; }
+
   /* RESPONSIVE */
   @media (max-width: 980px) {
     nav { padding: 18px 24px; }
@@ -642,7 +744,7 @@
   </div>
   <div class="hero-right fade-up">
     <div class="stat-card">
-      <div class="stat-num">9</div>
+      <div class="stat-num">8</div>
       <div class="stat-label">Products in production</div>
       <div class="stat-desc">E-commerce, education, voice agents, autonomous distribution, persona factories.</div>
     </div>
@@ -659,10 +761,17 @@
   </div>
 </section>
 
+<!-- TECH STACK MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Claude Code</span><em>·</em><span>Claude API</span><em>·</em><span>Codex</span><em>·</em><span>MCP</span><em>·</em><span>Anthropic SDK</span><em>·</em><span>Vapi</span><em>·</em><span>Twilio</span><em>·</em><span>Supabase</span><em>·</em><span>Stripe</span><em>·</em><span>Resend</span><em>·</em><span>Vercel</span><em>·</em><span>Next.js</span><em>·</em><span>Vite</span><em>·</em><span>React</span><em>·</em><span>Tailwind</span><em>·</em><span>Python</span><em>·</em><span>FastAPI</span><em>·</em><span>Postgres</span><em>·</em><span>Hetzner</span><em>·</em><span>Slack API</span><em>·</em><span>Obsidian</span><em>·</em><span>Gemini 2.5 Flash Image</span><em>·</em><span>Claude Code</span><em>·</em><span>Claude API</span><em>·</em><span>Codex</span><em>·</em><span>MCP</span><em>·</em><span>Anthropic SDK</span><em>·</em><span>Vapi</span><em>·</em><span>Twilio</span><em>·</em><span>Supabase</span><em>·</em><span>Stripe</span><em>·</em><span>Resend</span><em>·</em><span>Vercel</span><em>·</em><span>Next.js</span><em>·</em><span>Vite</span><em>·</em><span>React</span><em>·</em><span>Tailwind</span><em>·</em><span>Python</span><em>·</em><span>FastAPI</span><em>·</em><span>Postgres</span><em>·</em><span>Hetzner</span><em>·</em><span>Slack API</span><em>·</em><span>Obsidian</span><em>·</em><span>Gemini 2.5 Flash Image</span>
+  </div>
+</div>
+
 <!-- PORTFOLIO INTRO -->
 <section class="portfolio-intro" id="portfolio">
   <div class="section-label">Selected work</div>
-  <h2>Nine systems. <em>All shipped.</em></h2>
+  <h2>Eight systems. <em>All shipped.</em></h2>
   <p>The 99% gap is between a Claude POC and a workflow your team actually uses on Monday morning. Each card below crossed that gap. Live URL where public, abstract description where the work is internal.</p>
 </section>
 
@@ -825,33 +934,16 @@
       </div>
     </div>
 
-    <!-- 09 SARAH DOMINGUEZ -->
-    <a class="project-card" href="https://www.sarah-dominguez.com" target="_blank" rel="noopener">
-      <div class="card-shot">
-        <img src="/screenshots/sarah-dominguez.png" alt="Sarah Dominguez personal site">
-      </div>
-      <div class="card-body">
-        <div class="card-eyebrow">
-          <span>09 · Personal Site</span>
-          <span class="card-badge">Live</span>
-        </div>
-        <div class="card-title">Sarah <em>Dominguez</em></div>
-        <div class="card-desc">Personal site I built for my partner Sarah. Editorial typography pairing — Fraunces display with EB Garamond body — and a Supabase-backed contact form. Quiet, warm, hers.</div>
-        <div class="card-stack">Next.js · Fraunces + EB Garamond · Supabase form</div>
-        <span class="card-link">sarah-dominguez.com</span>
-      </div>
-    </a>
-
   </div>
 </section>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" class="about-section">
   <div class="section-label">About</div>
   <div class="about">
     <h2>I learn by <em>building.</em></h2>
     <p>I'm an AI implementation operator based in San Diego. Background is <strong>seven years in B2B sales and three years founding AI products</strong> — I ran the full pipeline before I started automating it.</p>
-    <p>Today I run four businesses on Claude and Codex. Most days I'm shipping production code, drafting outreach with an autonomous agent, and tuning the memory system that keeps all of it coherent. The work on this page is my real portfolio. If something here looks useful for your team, let's talk.</p>
+    <p>Most days I'm shipping production code with Claude Code, drafting outreach via an autonomous agent, and tuning a memory system that keeps the operating layer coherent across projects. The work on this page is my real portfolio. If something here looks useful for your team, let's talk.</p>
   </div>
 </section>
 
