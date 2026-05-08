@@ -167,9 +167,10 @@ nav {
 
 .roster-sub {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.3);
-  line-height: 1.6;
+  font-size: 12px; letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+  max-width: 480px;
 }
 
 .roster-label {
@@ -196,9 +197,9 @@ nav {
 .roster-row:hover { background: rgba(105,190,40,0.04); }
 .roster-row:last-child { border-bottom: none; }
 
-.roster-role { color: rgba(255,255,255,0.35); font-weight: 300; }
-.roster-name { color: var(--green-bright); font-weight: 500; }
-.roster-desc { color: rgba(255,255,255,0.2); font-weight: 300; font-size: 11px; text-align: right; }
+.roster-role { color: rgba(255,255,255,0.5); font-weight: 400; }
+.roster-name { color: var(--green-bright); font-weight: 500; font-size: 13px; }
+.roster-desc { color: rgba(255,255,255,0.35); font-weight: 300; font-size: 12px; text-align: right; }
 
 /* ═══════════ SECTIONS ═══════════ */
 .section {
@@ -250,7 +251,7 @@ nav {
   font-family: 'Instrument Serif', serif;
   font-size: clamp(120px, 16vw, 200px);
   font-weight: 400; font-style: italic;
-  color: rgba(76,175,80,0.06);
+  color: rgba(26, 77, 36, 0.12);
   line-height: 0.75;
   margin-bottom: -24px;
   margin-left: -6px;
@@ -258,9 +259,14 @@ nav {
   letter-spacing: -0.04em;
 }
 
-/* In dark sections, numbers glow slightly */
+/* Warm sections — slightly deeper */
+.section.warm .s-num {
+  color: rgba(26, 77, 36, 0.10);
+}
+
+/* Dark sections — green glow */
 .section.dark .s-num {
-  color: rgba(105,190,40,0.08);
+  color: rgba(105,190,40,0.12);
 }
 
 .s-tag {
@@ -492,26 +498,64 @@ nav {
 
 /* ═══════════ FOOTER ═══════════ */
 footer {
-  padding: 28px clamp(24px, 4vw, 56px);
-  border-top: 1px solid var(--whisper);
-  display: flex; justify-content: space-between; align-items: center;
+  background: var(--terminal);
+  padding: clamp(48px, 6vw, 80px) clamp(24px, 4vw, 56px) clamp(32px, 4vw, 48px);
+  position: relative;
+  overflow: hidden;
 }
 
-footer span {
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--green-bright), rgba(105,190,40,0.2), transparent);
+}
+
+/* Large decorative name */
+.foot-big {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 400; font-style: italic;
+  color: rgba(105,190,40,0.08);
+  line-height: 0.9;
+  margin-bottom: 32px;
+  letter-spacing: -0.03em;
+  user-select: none;
+}
+
+.foot-row {
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+
+.foot-left span {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; color: var(--dim);
-  letter-spacing: 0.06em;
+  font-size: 10px; color: rgba(232,228,220,0.25);
+  letter-spacing: 0.08em;
+  display: block;
+}
+
+.foot-left .foot-loc {
+  color: rgba(232,228,220,0.4);
+  margin-bottom: 4px;
 }
 
 .foot-links { display: flex; gap: 20px; }
 .foot-links a {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; color: var(--sage);
+  font-size: 10px; color: rgba(232,228,220,0.3);
   text-decoration: none; text-transform: uppercase;
-  letter-spacing: 0.06em;
-  transition: color .2s;
+  letter-spacing: 0.08em;
+  padding: 6px 12px;
+  border: 1px solid rgba(105,190,40,0.1);
+  border-radius: 100px;
+  transition: all .2s;
 }
-.foot-links a:hover { color: var(--green-bright); }
+.foot-links a:hover {
+  color: var(--green-bright);
+  border-color: rgba(105,190,40,0.3);
+  background: rgba(105,190,40,0.05);
+}
 
 /* ═══════════ MOBILE ═══════════ */
 @media (max-width: 900px) {
@@ -598,48 +642,48 @@ footer span {
   <div class="hero-right">
     <div class="roster-header">
       <div class="roster-title">Bond Villains Running My GTM</div>
-      <div class="roster-sub">8 autonomous AI agents. Each one runs off its own CLAUDE.md personality file. Managed through Claude Code, orchestrated via Slack, deployed on a Hetzner VPS. I approve. They execute around the clock.</div>
+      <div class="roster-sub">I built a team of AI agents named after Bond villains. Each one runs off its own CLAUDE.md file that defines what it does and how it thinks. They live on a Hetzner VPS, run on cron, and post everything to Slack so I can approve before anything goes live.</div>
     </div>
     <div class="roster-label">Agent Roster</div>
     <div class="roster-row">
       <span class="roster-role">Inbound</span>
       <span class="roster-name">Elektra</span>
-      <span class="roster-desc">Watches who approaches</span>
+      <span class="roster-desc">Reply detection, lead triage, signup monitoring</span>
     </div>
     <div class="roster-row">
       <span class="roster-role">Scout</span>
       <span class="roster-name">Janus</span>
-      <span class="roster-desc">Both sides of the market</span>
+      <span class="roster-desc">Job hunting, market intel, company research</span>
     </div>
     <div class="roster-row">
       <span class="roster-role">Ops</span>
       <span class="roster-name">Scaramanga</span>
-      <span class="roster-desc">Precision over volume</span>
+      <span class="roster-desc">Pipeline health, cron status, system diagnostics</span>
     </div>
     <div class="roster-row">
       <span class="roster-role">Content</span>
       <span class="roster-name">Francisco</span>
-      <span class="roster-desc">The golden post</span>
+      <span class="roster-desc">Drafts LinkedIn posts, marketing copy, builder logs</span>
     </div>
     <div class="roster-row">
       <span class="roster-role">Builder</span>
       <span class="roster-name">Silva</span>
-      <span class="roster-desc">Breaks and rebuilds</span>
+      <span class="roster-desc">Ships product code, migrations, deploys across repos</span>
     </div>
     <div class="roster-row">
       <span class="roster-role">Strategist</span>
       <span class="roster-name">Blofeld</span>
-      <span class="roster-desc">Sees the whole board</span>
+      <span class="roster-desc">GTM analysis, pipeline reviews, positioning</span>
     </div>
     <div class="roster-row">
       <span class="roster-role">Security</span>
       <span class="roster-name">Trevelyan</span>
-      <span class="roster-desc">Knows every vulnerability</span>
+      <span class="roster-desc">Semgrep scans, RLS audits, secret rotation</span>
     </div>
     <div class="roster-row">
       <span class="roster-role">Commander</span>
       <span class="roster-name">SPECTRE</span>
-      <span class="roster-desc">Ties all agents together</span>
+      <span class="roster-desc">Routes tasks, coordinates agents, approval gates</span>
     </div>
   </div>
 </section>
@@ -801,11 +845,18 @@ footer span {
 </section>
 
 <footer>
-  <span>Reid Chong</span>
-  <div class="foot-links">
-    <a href="https://linkedin.com/in/reid-chong07" target="_blank">LinkedIn</a>
-    <a href="https://github.com/Rchong01010" target="_blank">GitHub</a>
-    <a href="mailto:reid@getateam.ai">Email</a>
+  <div class="foot-big">Reid Chong</div>
+  <div class="foot-row">
+    <div class="foot-left">
+      <span class="foot-loc">San Diego, California</span>
+      <span>reid@getateam.ai</span>
+    </div>
+    <div class="foot-links">
+      <a href="https://linkedin.com/in/reid-chong07" target="_blank">LinkedIn</a>
+      <a href="https://github.com/Rchong01010" target="_blank">GitHub</a>
+      <a href="mailto:reid@getateam.ai">Email</a>
+      <a href="https://calendar.app.google/LvRVrXd99ybNrNgX8" target="_blank">Book a call</a>
+    </div>
   </div>
 </footer>
 
