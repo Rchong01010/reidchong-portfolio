@@ -182,6 +182,27 @@ nav {
 
 .section.warm { background: var(--paper-warm); }
 
+/* Dark band sections — full-width dark with light text */
+.section.dark {
+  background: var(--terminal);
+  color: #e8e4dc;
+  border-top-color: var(--terminal-border);
+}
+.section.dark .s-num { color: rgba(105,190,40,0.12); }
+.section.dark .s-desc { color: rgba(232,228,220,0.5); }
+.section.dark .s-stack { color: var(--green-bright); opacity: 0.5; }
+.section.dark .s-link { color: #e8e4dc; border-bottom-color: rgba(232,228,220,0.2); }
+.section.dark .s-link:hover { border-bottom-color: var(--green-bright); }
+
+/* Screenshot cards in dark sections get a green glow */
+.section.dark .s-screenshot {
+  border-color: rgba(105,190,40,0.12);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2), 0 12px 48px rgba(0,0,0,0.3);
+}
+.section.dark:hover .s-screenshot {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25), 0 24px 64px rgba(0,0,0,0.35), 0 0 80px rgba(105,190,40,0.06);
+}
+
 /* Project copy */
 .s-num {
   font-family: 'Instrument Serif', serif;
@@ -315,6 +336,57 @@ nav {
   display: grid; grid-template-columns: 1fr 1fr; gap: 0;
 }
 .s-screenshot.pair img { object-position: center top; }
+
+/* ═══════════ CONTEXT BAND ═══════════ */
+.context-band {
+  background: var(--ink);
+  padding: clamp(48px, 6vw, 80px) clamp(24px, 4vw, 56px);
+  border-top: 2px solid var(--green-bright);
+}
+
+.ctx-inner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: clamp(40px, 5vw, 80px);
+  align-items: center;
+}
+
+.ctx-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--green-bright); margin-bottom: 16px;
+}
+
+.ctx-text {
+  font-size: 16px; line-height: 1.75;
+  color: rgba(232,228,220,0.6);
+  max-width: 520px;
+}
+
+.ctx-stats {
+  display: flex; gap: clamp(24px, 3vw, 48px);
+}
+
+.ctx-stat { display: flex; flex-direction: column; gap: 4px; }
+
+.ctx-val {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 400; font-style: italic;
+  color: var(--green-bright);
+  line-height: 1;
+}
+
+.ctx-key {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(232,228,220,0.35);
+}
+
+@media (max-width: 900px) {
+  .ctx-inner { grid-template-columns: 1fr; }
+  .ctx-stats { justify-content: space-between; }
+}
 
 /* ═══════════ CONTACT ═══════════ */
 .contact {
@@ -466,7 +538,7 @@ footer span {
   </div>
 
   <div class="hero-right">
-    <div class="roster-label">SPECTRE Agent Roster</div>
+    <div class="roster-label">SPECTRE Agent Roster — autonomous agents managed through Claude Code + Slack</div>
     <div class="roster-row">
       <span class="roster-role">Inbound</span>
       <span class="roster-name">Elektra</span>
@@ -510,8 +582,32 @@ footer span {
   </div>
 </section>
 
-<!-- ═══════════ 01 HERMES ═══════════ -->
-<section class="section" id="work">
+<!-- ═══════════ CONTEXT BAND ═══════════ -->
+<section class="context-band" id="work">
+  <div class="ctx-inner">
+    <div class="ctx-block">
+      <div class="ctx-label">How it works</div>
+      <div class="ctx-text">Each agent runs off its own CLAUDE.md personality file. Hermes lives on a Hetzner VPS and executes on cron. Everything flows through Slack with hard approval gates. Claude Code is the brain. Slack is the nervous system. I stay in the loop on everything that touches the outside world.</div>
+    </div>
+    <div class="ctx-stats">
+      <div class="ctx-stat">
+        <span class="ctx-val">8</span>
+        <span class="ctx-key">Agents in roster</span>
+      </div>
+      <div class="ctx-stat">
+        <span class="ctx-val">24/7</span>
+        <span class="ctx-key">Cron-driven</span>
+      </div>
+      <div class="ctx-stat">
+        <span class="ctx-val">6</span>
+        <span class="ctx-key">Languages</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 01 HERMES — light ═══════════ -->
+<section class="section">
   <div class="s-copy">
     <div class="s-num">01</div>
     <div class="s-tag">Autonomous Distribution</div>
@@ -551,25 +647,10 @@ footer span {
   </div>
 </section>
 
-<!-- ═══════════ 02 GABRIELLA AMOURA ═══════════ -->
-<section class="section flip warm">
+<!-- ═══════════ 02 CLAUDE ACADEMY — dark ═══════════ -->
+<section class="section flip dark">
   <div class="s-copy">
     <div class="s-num">02</div>
-    <div class="s-tag">E-commerce</div>
-    <div class="s-title">Gabriella <em>Amoura</em></div>
-    <div class="s-desc">DTC apparel brand. Stripe checkout, transactional email, automated content pipeline that posts to Instagram and TikTok daily. Creator affiliate program with revenue share.</div>
-    <div class="s-stack">Next.js / Supabase / Stripe / Resend</div>
-    <a class="s-link" href="https://gabriellaamoura.com" target="_blank">gabriellaamoura.com</a>
-  </div>
-  <div class="s-visual">
-    <div class="s-screenshot"><img src="/screenshots/gabriella-amoura.png" alt="Gabriella Amoura"></div>
-  </div>
-</section>
-
-<!-- ═══════════ 03 CLAUDE ACADEMY ═══════════ -->
-<section class="section">
-  <div class="s-copy">
-    <div class="s-num">03</div>
     <div class="s-tag">Education</div>
     <div class="s-title">Claude <em>Academy</em></div>
     <div class="s-desc">Free Claude courses in seven languages. Creator affiliate program with Stripe-wired revenue share and discount codes. Lessons auto-update when Anthropic ships.</div>
@@ -581,10 +662,10 @@ footer span {
   </div>
 </section>
 
-<!-- ═══════════ 04 SLOANE ═══════════ -->
-<section class="section flip warm">
+<!-- ═══════════ 03 SLOANE — warm ═══════════ -->
+<section class="section warm">
   <div class="s-copy">
-    <div class="s-num">04</div>
+    <div class="s-num">03</div>
     <div class="s-tag">Voice Agent</div>
     <div class="s-title"><em>Sloane</em></div>
     <div class="s-desc">Voice intake agent with a real phone number. Picks up, takes the case, structures the data, hands the warm lead to a human. Vapi front end, Claude reasoning, Twilio number.</div>
@@ -596,10 +677,10 @@ footer span {
   </div>
 </section>
 
-<!-- ═══════════ 05 MEMORY SYSTEM ═══════════ -->
-<section class="section">
+<!-- ═══════════ 04 MEMORY SYSTEM — dark ═══════════ -->
+<section class="section flip dark">
   <div class="s-copy">
-    <div class="s-num">05</div>
+    <div class="s-num">04</div>
     <div class="s-tag">Context System</div>
     <div class="s-title">Memory <em>System</em></div>
     <div class="s-desc">A file architecture that keeps Claude grounded across hundreds of sessions. Lean state auto-loads, indexed memory routes to detail. Every agent in the roster reads from the same brain.</div>
@@ -622,10 +703,10 @@ footer span {
   </div>
 </section>
 
-<!-- ═══════════ 06 A TEAM ═══════════ -->
-<section class="section flip warm">
+<!-- ═══════════ 05 A TEAM — light ═══════════ -->
+<section class="section">
   <div class="s-copy">
-    <div class="s-num">06</div>
+    <div class="s-num">05</div>
     <div class="s-tag">B2B AI Enablement</div>
     <div class="s-title">A <em>Team</em></div>
     <div class="s-desc">The B2B brand. AI enablement for teams that bought the software but can't get their people to use it. Marketing site funnels to Sloane and Calendly.</div>
@@ -637,8 +718,23 @@ footer span {
   </div>
 </section>
 
-<!-- ═══════════ 07 PERSONA FACTORY ═══════════ -->
-<section class="section">
+<!-- ═══════════ 06 GABRIELLA AMOURA — dark ═══════════ -->
+<section class="section flip dark">
+  <div class="s-copy">
+    <div class="s-num">06</div>
+    <div class="s-tag">E-commerce</div>
+    <div class="s-title">Gabriella <em>Amoura</em></div>
+    <div class="s-desc">DTC apparel brand. Stripe checkout, transactional email, automated content pipeline that posts to Instagram and TikTok daily. Creator affiliate program with revenue share.</div>
+    <div class="s-stack">Next.js / Supabase / Stripe / Resend</div>
+    <a class="s-link" href="https://gabriellaamoura.com" target="_blank">gabriellaamoura.com</a>
+  </div>
+  <div class="s-visual">
+    <div class="s-screenshot"><img src="/screenshots/gabriella-amoura.png" alt="Gabriella Amoura"></div>
+  </div>
+</section>
+
+<!-- ═══════════ 07 PERSONA FACTORY — warm ═══════════ -->
+<section class="section warm">
   <div class="s-copy">
     <div class="s-num">07</div>
     <div class="s-tag">Synthetic Media</div>
