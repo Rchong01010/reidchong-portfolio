@@ -4,788 +4,661 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reid Chong</title>
+<meta name="description" content="Reid Chong — AI systems in production.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --black: #0a0f0d;
-    --off-black: #0c0f0e;
-    --dark: #0a1a12;
-    --dark-card: #0d1510;
-    --warm-white: #ffffff;
-    --page-bg: #fafaf8;
-    --cream: #f4f1ec;
-    --green: #69be28;
-    --green-mid: #1a5c30;
-    --green-dim: rgba(105, 190, 40, 0.6);
-    --green-glow: rgba(105, 190, 40, 0.08);
-    --muted: #6b7a6e;
-    --light-muted: #8a9590;
-    --border: rgba(10, 15, 13, 0.08);
-  }
+:root {
+  --ink: #111714;
+  --ink-soft: #2a332d;
+  --paper: #f7f6f3;
+  --paper-warm: #f0efe9;
+  --terminal: #0b1610;
+  --terminal-border: #1a2e22;
+  --green: #4caf50;
+  --green-bright: #69be28;
+  --green-muted: #3d7a41;
+  --sage: #7c9a82;
+  --dim: #8e9990;
+  --whisper: rgba(17, 23, 20, 0.06);
+}
 
-  html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; font-size: 16px; }
 
-  body {
-    background: var(--page-bg);
-    color: var(--black);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-  }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
 
-  a { color: inherit; text-decoration: none; }
+a { color: inherit; }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 24px 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(250,250,248,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
+::selection { background: rgba(76,175,80,0.15); }
 
-  .nav-name {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    color: var(--black);
-  }
+/* ═══════════ NAV ═══════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 clamp(24px, 4vw, 56px);
+  height: 64px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(247,246,243,0.88);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid var(--whisper);
+}
 
-  .nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-wordmark {
+  font-family: 'Instrument Serif', serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
 
-  .nav-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--warm-white); }
+.nav-r { display: flex; gap: 6px; align-items: center; }
 
-  .nav-talk {
-    color: #fff !important;
-    background: var(--black);
-    padding: 8px 18px;
-    font-weight: 500;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .nav-talk:hover { background: var(--green-mid); transform: translateY(-1px); }
+.nav-r a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px; font-weight: 400;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--dim); text-decoration: none;
+  padding: 7px 14px; border-radius: 100px;
+  transition: color .2s, background .2s;
+}
+.nav-r a:hover { color: var(--ink); background: var(--whisper); }
 
-  /* ── HERO ── */
+.nav-r a.talk {
+  color: var(--paper);
+  background: var(--ink);
+}
+.nav-r a.talk:hover { background: var(--green-muted); }
+
+/* ═══════════ HERO ═══════════ */
+.hero {
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 64px 0 0;
+}
+
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(32px, 5vw, 80px);
+  padding-right: clamp(24px, 3vw, 48px);
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--green-bright); margin-bottom: 28px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-eyebrow::before {
+  content: ''; width: 24px; height: 1.5px;
+  background: var(--green-bright); display: block;
+}
+
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(56px, 7.5vw, 108px);
+  font-weight: 400; line-height: 0.92;
+  letter-spacing: -0.025em;
+  margin-bottom: 28px;
+}
+.hero h1 em { font-style: italic; }
+.hero h1 .green { color: var(--green-bright); }
+
+.hero-sub {
+  font-size: 16px; line-height: 1.7;
+  color: var(--dim); max-width: 380px;
+}
+
+/* Right side — the agent roster as visual anchor */
+.hero-right {
+  background: var(--terminal);
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding: clamp(32px, 4vw, 64px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle scan-line texture */
+.hero-right::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(105,190,40,0.015) 3px,
+    rgba(105,190,40,0.015) 4px
+  );
+  pointer-events: none;
+}
+
+.roster-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--green-bright); margin-bottom: 28px;
+  opacity: 0.7;
+}
+
+.roster-row {
+  display: grid;
+  grid-template-columns: 90px 120px 1fr;
+  gap: 0;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(105,190,40,0.06);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  position: relative;
+  z-index: 1;
+  transition: background .15s;
+}
+.roster-row:hover { background: rgba(105,190,40,0.04); }
+.roster-row:last-child { border-bottom: none; }
+
+.roster-role { color: rgba(255,255,255,0.35); font-weight: 300; }
+.roster-name { color: var(--green-bright); font-weight: 500; }
+.roster-desc { color: rgba(255,255,255,0.2); font-weight: 300; font-size: 11px; text-align: right; }
+
+/* ═══════════ SECTIONS ═══════════ */
+.section {
+  padding: clamp(60px, 8vw, 120px) clamp(24px, 4vw, 56px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 5vw, 80px);
+  align-items: center;
+  border-top: 1px solid var(--whisper);
+}
+
+.section.flip .s-visual { order: -1; }
+
+.section.warm { background: var(--paper-warm); }
+
+/* Project copy */
+.s-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(64px, 8vw, 96px);
+  font-weight: 400; font-style: italic;
+  color: rgba(76,175,80,0.08);
+  line-height: 0.85;
+  margin-bottom: -8px;
+  user-select: none;
+}
+
+.s-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--green-bright);
+  margin-bottom: 14px;
+}
+
+.s-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(32px, 3.5vw, 50px);
+  font-weight: 400; line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin-bottom: 16px;
+}
+.s-title em { font-style: italic; color: var(--green-muted); }
+
+.s-desc {
+  font-size: 15px; line-height: 1.72;
+  color: var(--dim);
+  max-width: 440px;
+  margin-bottom: 20px;
+}
+
+.s-stack {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--sage);
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+}
+
+.s-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: gap .2s;
+}
+.s-link:hover { gap: 14px; }
+.s-link::after { content: '→'; color: var(--green-bright); font-size: 13px; }
+
+/* ═══════════ VISUAL BLOCKS ═══════════ */
+
+/* Screenshots */
+.s-screenshot {
+  width: 100%; aspect-ratio: 16 / 10;
+  background: var(--terminal);
+  overflow: hidden; border-radius: 6px;
+  border: 1px solid rgba(17,23,20,0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 12px 48px rgba(0,0,0,0.06);
+  transition: transform .4s cubic-bezier(.23,1,.32,1), box-shadow .4s;
+}
+.section:hover .s-screenshot {
+  transform: translateY(-4px) scale(1.005);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06), 0 24px 64px rgba(0,0,0,0.1);
+}
+.s-screenshot img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  display: block;
+}
+
+/* Dark terminal blocks */
+.s-terminal {
+  background: var(--terminal);
+  border: 1px solid var(--terminal-border);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 16px 48px rgba(0,0,0,0.12);
+  transition: transform .4s cubic-bezier(.23,1,.32,1), box-shadow .4s;
+}
+.section:hover .s-terminal {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1), 0 24px 64px rgba(0,0,0,0.16);
+}
+
+/* Slack-style Hermes visual */
+.slack-head {
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(105,190,40,0.08);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--green-bright);
+  display: flex; align-items: center; gap: 6px;
+}
+.slack-head::before { content: '#'; font-weight: 500; opacity: 0.5; }
+
+.slack-line {
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  display: flex; gap: 10px; align-items: baseline;
+}
+.slack-line:last-child { border-bottom: none; padding-bottom: 16px; }
+
+.sl-tag { color: var(--green-bright); font-weight: 500; min-width: 96px; white-space: nowrap; }
+.sl-txt { color: rgba(255,255,255,0.4); line-height: 1.5; }
+.sl-time { margin-left: auto; color: rgba(255,255,255,0.12); font-size: 10px; white-space: nowrap; }
+
+/* Memory tree */
+.mem-content {
+  padding: 28px 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; line-height: 1.8;
+}
+.mem-content .f { color: #e8e4dc; }
+.mem-content .c { color: rgba(255,255,255,0.2); font-size: 11px; }
+.mem-content .g { color: var(--green-bright); }
+.mem-cursor {
+  display: inline-block;
+  width: 7px; height: 15px;
+  background: var(--green-bright);
+  vertical-align: text-bottom;
+  margin-left: 1px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Persona pair */
+.s-screenshot.pair {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+}
+.s-screenshot.pair img { object-position: center top; }
+
+/* ═══════════ CONTACT ═══════════ */
+.contact {
+  padding: clamp(80px, 10vw, 140px) clamp(24px, 4vw, 56px);
+  border-top: 1px solid var(--whisper);
+  position: relative;
+}
+
+.contact h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 400; line-height: 1.05;
+  margin-bottom: 12px;
+}
+.contact h2 em { font-style: italic; color: var(--green-muted); }
+
+.contact p {
+  font-size: 15px; color: var(--dim);
+  margin-bottom: 36px;
+}
+
+.contact-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.contact-row a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 12px 24px; border-radius: 100px;
+  text-decoration: none;
+  border: 1px solid rgba(17,23,20,0.12);
+  color: var(--ink);
+  transition: all .2s;
+}
+.contact-row a:hover {
+  border-color: var(--green-muted);
+  background: rgba(76,175,80,0.05);
+  color: var(--green-muted);
+}
+.contact-row a.primary {
+  background: var(--ink); color: var(--paper);
+  border-color: var(--ink);
+}
+.contact-row a.primary:hover {
+  background: var(--green-muted); border-color: var(--green-muted);
+}
+
+/* ═══════════ FOOTER ═══════════ */
+footer {
+  padding: 28px clamp(24px, 4vw, 56px);
+  border-top: 1px solid var(--whisper);
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+footer span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--dim);
+  letter-spacing: 0.06em;
+}
+
+.foot-links { display: flex; gap: 20px; }
+.foot-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--sage);
+  text-decoration: none; text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: color .2s;
+}
+.foot-links a:hover { color: var(--green-bright); }
+
+/* ═══════════ MOBILE ═══════════ */
+@media (max-width: 900px) {
   .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 48px;
-    position: relative;
-    overflow: hidden;
+    grid-template-columns: 1fr;
+    min-height: auto;
   }
-
-  /* Subtle grid background */
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(105,190,40,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(105,190,40,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse at 30% 50%, black 20%, transparent 70%);
+  .hero-left {
+    padding: 100px 24px 48px;
   }
-
-  /* Green glow orb */
-  .hero::after {
-    content: '';
-    position: absolute;
-    top: 20%;
-    right: -10%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(105,190,40,0.06) 0%, transparent 70%);
-    pointer-events: none;
+  .hero-right {
+    padding: 32px 24px 40px;
   }
+  .hero h1 { font-size: 48px; }
+  .roster-row { grid-template-columns: 70px 100px 1fr; font-size: 11px; }
+  .roster-desc { display: none; }
 
-  .hero-content { position: relative; z-index: 1; max-width: 800px; }
-
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(64px, 8vw, 120px);
-    font-weight: 400;
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    margin-bottom: 32px;
+  .section {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
+  .section.flip .s-visual { order: 0; }
 
-  .hero h1 em {
-    font-style: italic;
-    color: var(--green);
-  }
+  .s-num { font-size: 56px; }
+  .s-title { font-size: 28px; }
 
-  .hero-tagline {
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 48px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
+  nav { padding: 0 20px; }
+  .nav-r a:not(.talk) { display: none; }
 
-  .hero-tagline::before {
-    content: '';
-    width: 40px;
-    height: 1px;
-    background: var(--green);
-  }
+  footer { flex-direction: column; gap: 12px; text-align: center; }
+}
 
-  .scroll-hint {
-    position: absolute;
-    bottom: 40px;
-    left: 48px;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--muted);
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    animation: pulse 2s ease-in-out infinite;
+/* ═══════════ ENTRANCE ANIMATIONS ═══════════ */
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in {
+    opacity: 0; transform: translateY(20px);
+    animation: fadeIn .6s ease forwards;
   }
+  .fade-in:nth-child(1) { animation-delay: .1s; }
+  .fade-in:nth-child(2) { animation-delay: .2s; }
+  .fade-in:nth-child(3) { animation-delay: .3s; }
+  .fade-in:nth-child(4) { animation-delay: .4s; }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
-  }
+  @keyframes fadeIn { to { opacity: 1; transform: none; } }
 
-  .scroll-hint::after {
-    content: '↓';
-    color: var(--green);
-    font-size: 14px;
+  .roster-row {
+    opacity: 0; transform: translateX(-8px);
+    animation: slideIn .4s ease forwards;
   }
+  .roster-row:nth-child(2) { animation-delay: .15s; }
+  .roster-row:nth-child(3) { animation-delay: .25s; }
+  .roster-row:nth-child(4) { animation-delay: .35s; }
+  .roster-row:nth-child(5) { animation-delay: .45s; }
+  .roster-row:nth-child(6) { animation-delay: .55s; }
+  .roster-row:nth-child(7) { animation-delay: .65s; }
+  .roster-row:nth-child(8) { animation-delay: .75s; }
+  .roster-row:nth-child(9) { animation-delay: .85s; }
 
-  /* ── PROJECT SECTIONS ── */
-  .project {
-    padding: 100px 48px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    position: relative;
-    border-top: 1px solid var(--border);
-    background: var(--page-bg);
-  }
-
-  .project:nth-child(odd) .project-visual { order: 1; }
-  .project:nth-child(odd) .project-copy { order: 2; }
-  .project:nth-child(even) .project-visual { order: 2; }
-  .project:nth-child(even) .project-copy { order: 1; }
-
-  /* Accent section - soft cream band */
-  .project.accent {
-    background: var(--cream);
-  }
-
-  /* Project number */
-  .project-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 100px;
-    font-weight: 700;
-    font-style: italic;
-    color: rgba(105,190,40,0.1);
-    line-height: 1;
-    margin-bottom: -12px;
-    user-select: none;
-  }
-
-  .project-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .project-tag::before {
-    content: '';
-    width: 20px;
-    height: 1px;
-    background: var(--green);
-  }
-
-  .project-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 4vw, 52px);
-    font-weight: 400;
-    line-height: 1.08;
-    margin-bottom: 20px;
-  }
-
-  .project-title em {
-    font-style: italic;
-    color: var(--green);
-  }
-
-  .project-desc {
-    font-size: 16px;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 24px;
-    max-width: 480px;
-  }
-
-  .project-stack {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--green-mid);
-    letter-spacing: 0.04em;
-    margin-bottom: 16px;
-  }
-
-  .project-link {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--black);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding-bottom: 2px;
-    border-bottom: 1px solid rgba(10,15,13,0.2);
-    transition: border-color 0.2s, gap 0.2s;
-  }
-  .project-link:hover { border-color: var(--green); gap: 12px; }
-  .project-link::after { content: '→'; color: var(--green); }
-
-  /* ── VISUALS ── */
-  .project-visual { position: relative; }
-
-  .project-screenshot {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    background: var(--dark-card);
-    overflow: hidden;
-    border: 1px solid rgba(10,15,13,0.08);
-    border-radius: 4px;
-    position: relative;
-    transition: transform 0.4s, box-shadow 0.4s;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  }
-  .project:hover .project-screenshot {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-  }
-
-  .project-screenshot img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    display: block;
-  }
-
-  /* Agent architecture visual */
-  .agent-visual {
-    background: var(--dark);
-    border: 1px solid rgba(105,190,40,0.15);
-    border-radius: 4px;
-    padding: 36px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.4s, box-shadow 0.4s;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
-  }
-  .project:hover .agent-visual {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-  }
-
-  .agent-visual::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--green), transparent);
-  }
-
-  .agent-visual-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--green-dim);
-    margin-bottom: 20px;
-  }
-
-  .agent-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(105,190,40,0.06);
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-  }
-
-  .agent-row:last-child { border-bottom: none; }
-
-  .agent-role { color: var(--light-muted); font-size: 11px; width: 80px; }
-  .agent-name { color: var(--green); font-weight: 500; width: 110px; }
-  .agent-desc { color: rgba(245,242,237,0.3); font-size: 11px; flex: 1; text-align: right; }
-
-  /* Hermes Slack visual */
-  .slack-visual {
-    background: var(--dark);
-    border: 1px solid rgba(105,190,40,0.15);
-    border-radius: 4px;
-    padding: 0;
-    overflow: hidden;
-    transition: transform 0.4s, box-shadow 0.4s;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
-  }
-  .project:hover .slack-visual {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-  }
-
-  .slack-header {
-    padding: 14px 20px;
-    border-bottom: 1px solid rgba(105,190,40,0.1);
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--green);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .slack-header::before {
-    content: '#';
-    font-size: 14px;
-    font-weight: 500;
-  }
-
-  .slack-msg {
-    padding: 12px 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.02);
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-
-  .slack-tag {
-    color: var(--green);
-    font-weight: 500;
-    white-space: nowrap;
-    min-width: 100px;
-  }
-
-  .slack-text { color: var(--light-muted); line-height: 1.5; }
-
-  .slack-time {
-    color: rgba(255,255,255,0.15);
-    font-size: 10px;
-    margin-left: auto;
-    white-space: nowrap;
-  }
-
-  /* Memory system visual */
-  .memory-visual {
-    background: var(--dark);
-    border: 1px solid rgba(105,190,40,0.15);
-    border-radius: 4px;
-    padding: 32px;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    line-height: 1.7;
-    color: var(--green);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.4s, box-shadow 0.4s;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
-  }
-  .project:hover .memory-visual {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-  }
-
-  .memory-visual::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--green), transparent);
-  }
-
-  .memory-line { display: block; }
-  .memory-line .file { color: var(--warm-white); }
-  .memory-line .comment { color: rgba(245,242,237,0.25); font-size: 11px; }
-  .memory-cursor {
-    display: inline-block;
-    width: 8px;
-    height: 16px;
-    background: var(--green);
-    animation: blink 1s step-end infinite;
-    vertical-align: text-bottom;
-    margin-left: 2px;
-  }
-  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-  /* ── CONTACT ── */
-  .contact {
-    padding: 120px 48px;
-    position: relative;
-    border-top: 1px solid var(--border);
-  }
-
-  .contact h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(40px, 5vw, 64px);
-    font-weight: 400;
-    margin-bottom: 16px;
-    color: var(--black);
-  }
-
-  .contact h2 em { font-style: italic; color: var(--green); }
-
-  .contact p {
-    font-size: 16px;
-    color: var(--muted);
-    margin-bottom: 40px;
-    max-width: 400px;
-  }
-
-  .contact-links {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .contact-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 14px 28px;
-    border: 1px solid rgba(10,15,13,0.15);
-    color: var(--black);
-    transition: all 0.2s;
-  }
-  .contact-links a:hover {
-    border-color: var(--green);
-    background: rgba(105,190,40,0.06);
-    color: var(--green-mid);
-  }
-
-  .contact-links a.primary {
-    background: var(--black);
-    color: #fff;
-    border-color: var(--black);
-    font-weight: 500;
-  }
-  .contact-links a.primary:hover {
-    background: var(--green-mid);
-    border-color: var(--green-mid);
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    padding: 32px 48px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .footer-name {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-  }
-
-  .footer-links { display: flex; gap: 24px; }
-  .footer-links a {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: var(--light-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    transition: color 0.2s;
-  }
-  .footer-links a:hover { color: var(--green); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 18px 24px; }
-    .nav-links a:not(.nav-talk) { display: none; }
-    .hero { padding: 0 24px; }
-    .project { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
-    .project:nth-child(odd) .project-visual,
-    .project:nth-child(even) .project-visual { order: 1; }
-    .project:nth-child(odd) .project-copy,
-    .project:nth-child(even) .project-copy { order: 2; }
-    .contact { padding: 80px 24px; }
-    footer { padding: 24px; flex-direction: column; gap: 16px; }
-  }
+  @keyframes slideIn { to { opacity: 1; transform: none; } }
+}
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-name">Reid Chong</div>
-  <div class="nav-links">
+  <a href="/" class="nav-wordmark">Reid Chong</a>
+  <div class="nav-r">
     <a href="#work">Work</a>
     <a href="#contact">Contact</a>
     <a href="https://linkedin.com/in/reid-chong07" target="_blank">LinkedIn</a>
     <a href="https://github.com/Rchong01010" target="_blank">GitHub</a>
-    <a class="nav-talk" href="https://calendar.app.google/LvRVrXd99ybNrNgX8" target="_blank">Talk</a>
+    <a class="talk" href="https://calendar.app.google/LvRVrXd99ybNrNgX8" target="_blank">Talk</a>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ═══════════ HERO ═══════════ -->
 <section class="hero">
-  <div class="hero-content">
-    <div class="hero-tagline">San Diego</div>
-    <h1>Reid<br><em>Chong</em></h1>
+  <div class="hero-left">
+    <div class="hero-eyebrow fade-in">Portfolio</div>
+    <h1 class="fade-in">Reid<br><em class="green">Chong</em></h1>
+    <p class="hero-sub fade-in">San Diego. Seven years in sales, three years building AI systems. Everything on this page is in production.</p>
   </div>
-  <div class="scroll-hint">Scroll</div>
+
+  <div class="hero-right">
+    <div class="roster-label">SPECTRE Agent Roster</div>
+    <div class="roster-row">
+      <span class="roster-role">Inbound</span>
+      <span class="roster-name">Elektra</span>
+      <span class="roster-desc">Watches who approaches</span>
+    </div>
+    <div class="roster-row">
+      <span class="roster-role">Scout</span>
+      <span class="roster-name">Janus</span>
+      <span class="roster-desc">Both sides of the market</span>
+    </div>
+    <div class="roster-row">
+      <span class="roster-role">Ops</span>
+      <span class="roster-name">Scaramanga</span>
+      <span class="roster-desc">Precision over volume</span>
+    </div>
+    <div class="roster-row">
+      <span class="roster-role">Content</span>
+      <span class="roster-name">Francisco</span>
+      <span class="roster-desc">The golden post</span>
+    </div>
+    <div class="roster-row">
+      <span class="roster-role">Builder</span>
+      <span class="roster-name">Silva</span>
+      <span class="roster-desc">Breaks and rebuilds</span>
+    </div>
+    <div class="roster-row">
+      <span class="roster-role">Strategist</span>
+      <span class="roster-name">Blofeld</span>
+      <span class="roster-desc">Sees the whole board</span>
+    </div>
+    <div class="roster-row">
+      <span class="roster-role">Security</span>
+      <span class="roster-name">Trevelyan</span>
+      <span class="roster-desc">Knows every vulnerability</span>
+    </div>
+    <div class="roster-row">
+      <span class="roster-role">Commander</span>
+      <span class="roster-name">SPECTRE</span>
+      <span class="roster-desc">Ties all agents together</span>
+    </div>
+  </div>
 </section>
 
-<!-- 01: AGENT TEAM -->
-<section class="project accent" id="work">
-  <div class="project-copy">
-    <div class="project-num">01</div>
-    <div class="project-tag">Agent Architecture</div>
-    <div class="project-title">Bond Villains<br>Running My <em>GTM</em></div>
-    <div class="project-desc">A team of AI agents named after Bond villains. Each one runs off its own CLAUDE.md file. A commander agent called SPECTRE coordinates the roster. Outreach, content, recon, ops. Everything posts to Slack for my sign-off before anything goes live.</div>
-    <div class="project-stack">Claude Code / Hermes / Slack API / Hetzner / MCP / Cron</div>
+<!-- ═══════════ 01 HERMES ═══════════ -->
+<section class="section" id="work">
+  <div class="s-copy">
+    <div class="s-num">01</div>
+    <div class="s-tag">Autonomous Distribution</div>
+    <div class="s-title"><em>Hermes</em></div>
+    <div class="s-desc">Always-on agent on a Hetzner VPS. Runs on cron around the clock. Drafts cold pitches in six languages, surfaces reply opportunities on X, monitors for product launches. Everything posts to Slack behind hard approval gates.</div>
+    <div class="s-stack">Hetzner / Codex CLI / Slack API / Supabase / Firecrawl / systemd</div>
   </div>
-  <div class="project-visual">
-    <div class="agent-visual">
-      <div class="agent-visual-label">SPECTRE Agent Roster</div>
-      <div class="agent-row">
-        <span class="agent-role">Inbound</span>
-        <span class="agent-name">Elektra</span>
-        <span class="agent-desc">Watches who approaches. Patience is the weapon.</span>
+  <div class="s-visual">
+    <div class="s-terminal">
+      <div class="slack-head">hermes-updates</div>
+      <div class="slack-line">
+        <span class="sl-tag">[PITCH-SENT]</span>
+        <span class="sl-txt">Creator outreach: 6 languages, 8 prospects queued</span>
+        <span class="sl-time">8:15 AM</span>
       </div>
-      <div class="agent-row">
-        <span class="agent-role">Scout</span>
-        <span class="agent-name">Janus</span>
-        <span class="agent-desc">Intelligence and recon. Both sides of the market.</span>
+      <div class="slack-line">
+        <span class="sl-tag">[X-REPLY]</span>
+        <span class="sl-txt">Thread on Meta Ads + AI agents. Draft ready.</span>
+        <span class="sl-time">12:02 PM</span>
       </div>
-      <div class="agent-row">
-        <span class="agent-role">Ops</span>
-        <span class="agent-name">Scaramanga</span>
-        <span class="agent-desc">One shot, one kill. Precision over volume.</span>
+      <div class="slack-line">
+        <span class="sl-tag">[SNAPSHOT]</span>
+        <span class="sl-txt">Weekly affiliate metrics. 2 signups, 1 conversion.</span>
+        <span class="sl-time">Mon 8 AM</span>
       </div>
-      <div class="agent-row">
-        <span class="agent-role">Content</span>
-        <span class="agent-name">Francisco</span>
-        <span class="agent-desc">The golden gun is the golden post.</span>
+      <div class="slack-line">
+        <span class="sl-tag">[CLAUDE-EVENT]</span>
+        <span class="sl-txt">Anthropic shipped MCP auth. Lesson draft queued.</span>
+        <span class="sl-time">Wed 3:41 PM</span>
       </div>
-      <div class="agent-row">
-        <span class="agent-role">Builder</span>
-        <span class="agent-name">Silva</span>
-        <span class="agent-desc">Breaks and rebuilds systems.</span>
-      </div>
-      <div class="agent-row">
-        <span class="agent-role">Strategist</span>
-        <span class="agent-name">Blofeld</span>
-        <span class="agent-desc">Sees the whole board.</span>
-      </div>
-      <div class="agent-row">
-        <span class="agent-role">Security</span>
-        <span class="agent-name">Trevelyan</span>
-        <span class="agent-desc">Former insider. Knows every vulnerability.</span>
-      </div>
-      <div class="agent-row">
-        <span class="agent-role">Commander</span>
-        <span class="agent-name">SPECTRE</span>
-        <span class="agent-desc">Mission control. Ties all agents together.</span>
+      <div class="slack-line">
+        <span class="sl-tag">[CONTENT]</span>
+        <span class="sl-txt">LinkedIn post drafted. Series post 2 ready.</span>
+        <span class="sl-time">Thu 9:30 AM</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 02: HERMES -->
-<section class="project">
-  <div class="project-visual">
-    <div class="slack-visual">
-      <div class="slack-header">hermes-updates</div>
-      <div class="slack-msg">
-        <span class="slack-tag">[PITCH-SENT]</span>
-        <span class="slack-text">Creator outreach: 6 languages, 8 prospects queued.</span>
-        <span class="slack-time">8:15 AM</span>
+<!-- ═══════════ 02 GABRIELLA AMOURA ═══════════ -->
+<section class="section flip warm">
+  <div class="s-copy">
+    <div class="s-num">02</div>
+    <div class="s-tag">E-commerce</div>
+    <div class="s-title">Gabriella <em>Amoura</em></div>
+    <div class="s-desc">DTC apparel brand. Stripe checkout, transactional email, automated content pipeline that posts to Instagram and TikTok daily. Creator affiliate program with revenue share.</div>
+    <div class="s-stack">Next.js / Supabase / Stripe / Resend</div>
+    <a class="s-link" href="https://gabriellaamoura.com" target="_blank">gabriellaamoura.com</a>
+  </div>
+  <div class="s-visual">
+    <div class="s-screenshot"><img src="/screenshots/gabriella-amoura.png" alt="Gabriella Amoura"></div>
+  </div>
+</section>
+
+<!-- ═══════════ 03 CLAUDE ACADEMY ═══════════ -->
+<section class="section">
+  <div class="s-copy">
+    <div class="s-num">03</div>
+    <div class="s-tag">Education</div>
+    <div class="s-title">Claude <em>Academy</em></div>
+    <div class="s-desc">Free Claude courses in seven languages. Creator affiliate program with Stripe-wired revenue share and discount codes. Lessons auto-update when Anthropic ships.</div>
+    <div class="s-stack">Next.js / Supabase / Stripe / 7-locale i18n</div>
+    <a class="s-link" href="https://claude-academy.com" target="_blank">claude-academy.com</a>
+  </div>
+  <div class="s-visual">
+    <div class="s-screenshot"><img src="/screenshots/claude-academy.png" alt="Claude Academy"></div>
+  </div>
+</section>
+
+<!-- ═══════════ 04 SLOANE ═══════════ -->
+<section class="section flip warm">
+  <div class="s-copy">
+    <div class="s-num">04</div>
+    <div class="s-tag">Voice Agent</div>
+    <div class="s-title"><em>Sloane</em></div>
+    <div class="s-desc">Voice intake agent with a real phone number. Picks up, takes the case, structures the data, hands the warm lead to a human. Vapi front end, Claude reasoning, Twilio number.</div>
+    <div class="s-stack">Vapi / Twilio / Claude API / FastAPI / Render</div>
+    <a class="s-link" href="https://getateam.ai/demo" target="_blank">Try the demo</a>
+  </div>
+  <div class="s-visual">
+    <div class="s-screenshot"><img src="/screenshots/sloane-demo.png" alt="Sloane"></div>
+  </div>
+</section>
+
+<!-- ═══════════ 05 MEMORY SYSTEM ═══════════ -->
+<section class="section">
+  <div class="s-copy">
+    <div class="s-num">05</div>
+    <div class="s-tag">Context System</div>
+    <div class="s-title">Memory <em>System</em></div>
+    <div class="s-desc">A file architecture that keeps Claude grounded across hundreds of sessions. Lean state auto-loads, indexed memory routes to detail. Every agent in the roster reads from the same brain.</div>
+    <div class="s-stack">Markdown / Claude Code hooks / Obsidian vault</div>
+  </div>
+  <div class="s-visual">
+    <div class="s-terminal">
+      <div class="mem-content">
+        <span class="g">~/A Team/</span><br>
+        ├── <span class="f">STATE.md</span> <span class="c">where we are right now</span><br>
+        ├── <span class="f">STATE-archive.md</span> <span class="c">every decision, timestamped</span><br>
+        ├── <span class="f">MEMORY.md</span> <span class="c">index of 80+ topic files</span><br>
+        ├── <span class="f">STRATEGY-DIGEST</span> <span class="c">summaries of everything</span><br>
+        └── <span class="f">strategy/</span> <span class="c">full docs when you need depth</span><br>
+        <br>
+        <span class="c">Loads on every Claude session.</span><br>
+        <span class="c">Every agent starts grounded.</span><span class="mem-cursor"></span>
       </div>
-      <div class="slack-msg">
-        <span class="slack-tag">[X-REPLY]</span>
-        <span class="slack-text">Thread on Meta Ads + AI agents. Draft ready for review.</span>
-        <span class="slack-time">12:02 PM</span>
-      </div>
-      <div class="slack-msg">
-        <span class="slack-tag">[SNAPSHOT]</span>
-        <span class="slack-text">Weekly affiliate metrics. 2 new signups, 1 conversion.</span>
-        <span class="slack-time">Mon 8:00 AM</span>
-      </div>
-      <div class="slack-msg">
-        <span class="slack-tag">[CLAUDE-EVENT]</span>
-        <span class="slack-text">Anthropic shipped MCP auth. Lesson draft queued.</span>
-        <span class="slack-time">Wed 3:41 PM</span>
-      </div>
-      <div class="slack-msg">
-        <span class="slack-tag">[CONTENT]</span>
-        <span class="slack-text">LinkedIn post drafted. 4-post series, post 2 ready.</span>
-        <span class="slack-time">Thu 9:30 AM</span>
-      </div>
-    </div>
-  </div>
-  <div class="project-copy">
-    <div class="project-num">02</div>
-    <div class="project-tag">Autonomous Distribution</div>
-    <div class="project-title"><em>Hermes</em></div>
-    <div class="project-desc">Always-on agent living on a Hetzner VPS. Runs on cron around the clock. Scans the web, drafts cold pitches in six languages, finds job matches, surfaces reply opportunities on X. Everything posts to a Slack channel behind hard approval gates. I never write outbound from scratch anymore.</div>
-    <div class="project-stack">Hetzner / Codex CLI / Slack API / Supabase / Firecrawl / systemd</div>
-  </div>
-</section>
-
-<!-- 03: GABRIELLA AMOURA -->
-<section class="project accent">
-  <div class="project-copy">
-    <div class="project-num">03</div>
-    <div class="project-tag">E-commerce</div>
-    <div class="project-title">Gabriella<br><em>Amoura</em></div>
-    <div class="project-desc">DTC apparel brand. Stripe checkout, transactional email, automated content pipeline that posts to Instagram and TikTok daily. Creator affiliate program with revenue share built in.</div>
-    <div class="project-stack">Next.js / Supabase / Stripe / Resend</div>
-    <a class="project-link" href="https://gabriellaamoura.com" target="_blank">gabriellaamoura.com</a>
-  </div>
-  <div class="project-visual">
-    <div class="project-screenshot">
-      <img src="/screenshots/gabriella-amoura.png" alt="Gabriella Amoura">
     </div>
   </div>
 </section>
 
-<!-- 04: CLAUDE ACADEMY -->
-<section class="project">
-  <div class="project-visual">
-    <div class="project-screenshot">
-      <img src="/screenshots/claude-academy.png" alt="Claude Academy">
-    </div>
+<!-- ═══════════ 06 A TEAM ═══════════ -->
+<section class="section flip warm">
+  <div class="s-copy">
+    <div class="s-num">06</div>
+    <div class="s-tag">B2B AI Enablement</div>
+    <div class="s-title">A <em>Team</em></div>
+    <div class="s-desc">The B2B brand. AI enablement for teams that bought the software but can't get their people to use it. Marketing site funnels to Sloane and Calendly.</div>
+    <div class="s-stack">React / Vite / Tailwind / Vapi</div>
+    <a class="s-link" href="https://getateam.ai" target="_blank">getateam.ai</a>
   </div>
-  <div class="project-copy">
-    <div class="project-num">04</div>
-    <div class="project-tag">Education</div>
-    <div class="project-title">Claude<br><em>Academy</em></div>
-    <div class="project-desc">Free Claude courses in seven languages. Creator affiliate program with Stripe-wired revenue share and discount codes. Lessons auto-update when Anthropic ships new features.</div>
-    <div class="project-stack">Next.js / Supabase / Stripe / 7-locale i18n</div>
-    <a class="project-link" href="https://claude-academy.com" target="_blank">claude-academy.com</a>
+  <div class="s-visual">
+    <div class="s-screenshot"><img src="/screenshots/a-team.png" alt="A Team"></div>
   </div>
 </section>
 
-<!-- 05: SLOANE -->
-<section class="project accent">
-  <div class="project-copy">
-    <div class="project-num">05</div>
-    <div class="project-tag">Voice Agent</div>
-    <div class="project-title"><em>Sloane</em></div>
-    <div class="project-desc">Voice intake agent with a real phone number. Picks up, takes the case, structures the data, hands the warm lead to a human. Vapi front end, Claude reasoning, Twilio number.</div>
-    <div class="project-stack">Vapi / Twilio / Claude API / FastAPI / Render</div>
-    <a class="project-link" href="https://getateam.ai/demo" target="_blank">Try the demo</a>
+<!-- ═══════════ 07 PERSONA FACTORY ═══════════ -->
+<section class="section">
+  <div class="s-copy">
+    <div class="s-num">07</div>
+    <div class="s-tag">Synthetic Media</div>
+    <div class="s-title">AI Persona <em>Factory</em></div>
+    <div class="s-desc">Two locked AI personas with hero stills, five-scene libraries, and seed posts. The pipeline uses a hero image as identity-lock reference so every downstream generation matches face, body, and wardrobe.</div>
+    <div class="s-stack">Gemini 2.5 Flash Image / hero-as-reference identity-lock</div>
   </div>
-  <div class="project-visual">
-    <div class="project-screenshot">
-      <img src="/screenshots/sloane-demo.png" alt="Sloane">
-    </div>
-  </div>
-</section>
-
-<!-- 06: MEMORY SYSTEM -->
-<section class="project">
-  <div class="project-visual">
-    <div class="memory-visual">
-      <span class="memory-line"><span class="file">~/A Team/</span></span>
-      <span class="memory-line">├── <span class="file">STATE.md</span>          <span class="comment">where we are right now</span></span>
-      <span class="memory-line">├── <span class="file">STATE-archive.md</span>  <span class="comment">every decision, timestamped</span></span>
-      <span class="memory-line">├── <span class="file">MEMORY.md</span>         <span class="comment">index of 80+ topic files</span></span>
-      <span class="memory-line">├── <span class="file">STRATEGY-DIGEST</span>   <span class="comment">summaries of everything</span></span>
-      <span class="memory-line">└── <span class="file">strategy/</span>         <span class="comment">full docs when you need depth</span></span>
-      <span class="memory-line">&nbsp;</span>
-      <span class="memory-line"><span class="comment">Loads on every Claude session.</span></span>
-      <span class="memory-line"><span class="comment">Every agent starts grounded.</span><span class="memory-cursor"></span></span>
-    </div>
-  </div>
-  <div class="project-copy">
-    <div class="project-num">06</div>
-    <div class="project-tag">Context System</div>
-    <div class="project-title">Memory<br><em>System</em></div>
-    <div class="project-desc">A file architecture that keeps Claude grounded across hundreds of sessions. Lean state auto-loads, indexed memory routes to detail, digest summarizes the long tail. Every agent in the roster reads from the same brain.</div>
-    <div class="project-stack">Markdown / Claude Code hooks / Obsidian vault</div>
-  </div>
-</section>
-
-<!-- 07: A TEAM -->
-<section class="project accent">
-  <div class="project-copy">
-    <div class="project-num">07</div>
-    <div class="project-tag">B2B AI Enablement</div>
-    <div class="project-title">A <em>Team</em></div>
-    <div class="project-desc">The B2B brand. AI enablement for teams that bought the software but can't get their people to use it. Marketing site funnels to Sloane and Calendly.</div>
-    <div class="project-stack">React / Vite / Tailwind / Vapi</div>
-    <a class="project-link" href="https://getateam.ai" target="_blank">getateam.ai</a>
-  </div>
-  <div class="project-visual">
-    <div class="project-screenshot">
-      <img src="/screenshots/a-team.png" alt="A Team">
+  <div class="s-visual">
+    <div class="s-screenshot pair">
+      <img src="/screenshots/persona-maya.png" alt="Maya">
+      <img src="/screenshots/persona-romy.png" alt="Romy">
     </div>
   </div>
 </section>
 
-<!-- 08: PERSONA FACTORY -->
-<section class="project">
-  <div class="project-visual">
-    <div class="project-screenshot" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0;">
-      <img src="/screenshots/persona-maya.png" alt="Maya" style="object-position: center top;">
-      <img src="/screenshots/persona-romy.png" alt="Romy" style="object-position: center top;">
-    </div>
-  </div>
-  <div class="project-copy">
-    <div class="project-num">08</div>
-    <div class="project-tag">Synthetic Media</div>
-    <div class="project-title">AI Persona<br><em>Factory</em></div>
-    <div class="project-desc">Two locked AI personas with hero stills, five-scene libraries, and seed posts. The pipeline uses a hero image as identity-lock reference so every downstream generation matches face, body, and wardrobe.</div>
-    <div class="project-stack">Gemini 2.5 Flash Image / hero-as-reference identity-lock pipeline</div>
-  </div>
-</section>
-
-<!-- CONTACT -->
+<!-- ═══════════ CONTACT ═══════════ -->
 <section class="contact" id="contact">
   <h2>Let's <em>talk.</em></h2>
   <p>If something here caught your eye.</p>
-  <div class="contact-links">
+  <div class="contact-row">
     <a class="primary" href="https://calendar.app.google/LvRVrXd99ybNrNgX8" target="_blank">Book a call</a>
     <a href="mailto:reid@getateam.ai">Email</a>
     <a href="https://linkedin.com/in/reid-chong07" target="_blank">LinkedIn</a>
@@ -794,8 +667,8 @@
 </section>
 
 <footer>
-  <span class="footer-name">Reid Chong</span>
-  <div class="footer-links">
+  <span>Reid Chong</span>
+  <div class="foot-links">
     <a href="https://linkedin.com/in/reid-chong07" target="_blank">LinkedIn</a>
     <a href="https://github.com/Rchong01010" target="_blank">GitHub</a>
     <a href="mailto:reid@getateam.ai">Email</a>
