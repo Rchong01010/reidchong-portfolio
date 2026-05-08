@@ -10,24 +10,27 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --black: #060808;
+    --black: #0a0f0d;
     --off-black: #0c0f0e;
     --dark: #0a1a12;
     --dark-card: #0d1510;
-    --warm-white: #f5f2ed;
-    --cream: #e8e2d8;
+    --warm-white: #ffffff;
+    --page-bg: #fafaf8;
+    --cream: #f4f1ec;
     --green: #69be28;
+    --green-mid: #1a5c30;
     --green-dim: rgba(105, 190, 40, 0.6);
-    --green-glow: rgba(105, 190, 40, 0.12);
-    --muted: #5a6560;
+    --green-glow: rgba(105, 190, 40, 0.08);
+    --muted: #6b7a6e;
     --light-muted: #8a9590;
+    --border: rgba(10, 15, 13, 0.08);
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--black);
-    color: var(--warm-white);
+    background: var(--page-bg);
+    color: var(--black);
     font-family: 'DM Sans', sans-serif;
     font-weight: 300;
     overflow-x: hidden;
@@ -44,9 +47,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(6,8,8,0.85);
+    background: rgba(250,250,248,0.92);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(105,190,40,0.08);
+    border-bottom: 1px solid var(--border);
   }
 
   .nav-name {
@@ -54,7 +57,7 @@
     font-size: 15px;
     font-weight: 500;
     letter-spacing: 0.04em;
-    color: var(--warm-white);
+    color: var(--black);
   }
 
   .nav-links { display: flex; gap: 28px; align-items: center; }
@@ -70,13 +73,13 @@
   .nav-links a:hover { color: var(--warm-white); }
 
   .nav-talk {
-    color: var(--black) !important;
-    background: var(--green);
+    color: #fff !important;
+    background: var(--black);
     padding: 8px 18px;
     font-weight: 500;
     transition: background 0.2s, transform 0.2s;
   }
-  .nav-talk:hover { background: #7dd636; transform: translateY(-1px); }
+  .nav-talk:hover { background: var(--green-mid); transform: translateY(-1px); }
 
   /* ── HERO ── */
   .hero {
@@ -95,8 +98,8 @@
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(105,190,40,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(105,190,40,0.03) 1px, transparent 1px);
+      linear-gradient(rgba(105,190,40,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(105,190,40,0.04) 1px, transparent 1px);
     background-size: 60px 60px;
     mask-image: radial-gradient(ellipse at 30% 50%, black 20%, transparent 70%);
   }
@@ -109,7 +112,7 @@
     right: -10%;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(105,190,40,0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(105,190,40,0.06) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -182,7 +185,8 @@
     gap: 80px;
     align-items: center;
     position: relative;
-    border-top: 1px solid rgba(105,190,40,0.08);
+    border-top: 1px solid var(--border);
+    background: var(--page-bg);
   }
 
   .project:nth-child(odd) .project-visual { order: 1; }
@@ -190,19 +194,9 @@
   .project:nth-child(even) .project-visual { order: 2; }
   .project:nth-child(even) .project-copy { order: 1; }
 
-  /* Accent section */
+  /* Accent section - soft cream band */
   .project.accent {
-    background: linear-gradient(180deg, var(--off-black) 0%, var(--black) 100%);
-  }
-
-  .project.accent::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    background: var(--cream);
   }
 
   /* Project number */
@@ -211,7 +205,7 @@
     font-size: 100px;
     font-weight: 700;
     font-style: italic;
-    color: rgba(105,190,40,0.06);
+    color: rgba(105,190,40,0.1);
     line-height: 1;
     margin-bottom: -12px;
     user-select: none;
@@ -251,7 +245,7 @@
 
   .project-desc {
     font-size: 16px;
-    color: var(--light-muted);
+    color: var(--muted);
     line-height: 1.7;
     margin-bottom: 24px;
     max-width: 480px;
@@ -260,7 +254,7 @@
   .project-stack {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
-    color: var(--green-dim);
+    color: var(--green-mid);
     letter-spacing: 0.04em;
     margin-bottom: 16px;
   }
@@ -270,12 +264,12 @@
     font-size: 11px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--warm-white);
+    color: var(--black);
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding-bottom: 2px;
-    border-bottom: 1px solid rgba(245,242,237,0.2);
+    border-bottom: 1px solid rgba(10,15,13,0.2);
     transition: border-color 0.2s, gap 0.2s;
   }
   .project-link:hover { border-color: var(--green); gap: 12px; }
@@ -289,13 +283,15 @@
     aspect-ratio: 16 / 10;
     background: var(--dark-card);
     overflow: hidden;
-    border: 1px solid rgba(105,190,40,0.1);
+    border: 1px solid rgba(10,15,13,0.08);
+    border-radius: 4px;
     position: relative;
     transition: transform 0.4s, box-shadow 0.4s;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
   }
   .project:hover .project-screenshot {
     transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(105,190,40,0.08);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
   }
 
   .project-screenshot img {
@@ -307,16 +303,18 @@
 
   /* Agent architecture visual */
   .agent-visual {
-    background: var(--dark-card);
+    background: var(--dark);
     border: 1px solid rgba(105,190,40,0.15);
+    border-radius: 4px;
     padding: 36px;
     position: relative;
     overflow: hidden;
     transition: transform 0.4s, box-shadow 0.4s;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
   }
   .project:hover .agent-visual {
     transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(105,190,40,0.08);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
   }
 
   .agent-visual::before {
@@ -356,15 +354,17 @@
 
   /* Hermes Slack visual */
   .slack-visual {
-    background: var(--dark-card);
+    background: var(--dark);
     border: 1px solid rgba(105,190,40,0.15);
+    border-radius: 4px;
     padding: 0;
     overflow: hidden;
     transition: transform 0.4s, box-shadow 0.4s;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
   }
   .project:hover .slack-visual {
     transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(105,190,40,0.08);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
   }
 
   .slack-header {
@@ -412,8 +412,9 @@
 
   /* Memory system visual */
   .memory-visual {
-    background: var(--dark-card);
+    background: var(--dark);
     border: 1px solid rgba(105,190,40,0.15);
+    border-radius: 4px;
     padding: 32px;
     font-family: 'DM Mono', monospace;
     font-size: 12px;
@@ -422,10 +423,11 @@
     position: relative;
     overflow: hidden;
     transition: transform 0.4s, box-shadow 0.4s;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
   }
   .project:hover .memory-visual {
     transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(105,190,40,0.08);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
   }
 
   .memory-visual::before {
@@ -456,17 +458,7 @@
   .contact {
     padding: 120px 48px;
     position: relative;
-    border-top: 1px solid rgba(105,190,40,0.08);
-  }
-
-  .contact::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    border-top: 1px solid var(--border);
   }
 
   .contact h2 {
@@ -474,6 +466,7 @@
     font-size: clamp(40px, 5vw, 64px);
     font-weight: 400;
     margin-bottom: 16px;
+    color: var(--black);
   }
 
   .contact h2 em { font-style: italic; color: var(--green); }
@@ -497,30 +490,31 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     padding: 14px 28px;
-    border: 1px solid rgba(245,242,237,0.15);
+    border: 1px solid rgba(10,15,13,0.15);
+    color: var(--black);
     transition: all 0.2s;
   }
   .contact-links a:hover {
     border-color: var(--green);
-    background: rgba(105,190,40,0.08);
-    color: var(--green);
+    background: rgba(105,190,40,0.06);
+    color: var(--green-mid);
   }
 
   .contact-links a.primary {
-    background: var(--green);
-    color: var(--black);
-    border-color: var(--green);
+    background: var(--black);
+    color: #fff;
+    border-color: var(--black);
     font-weight: 500;
   }
   .contact-links a.primary:hover {
-    background: #7dd636;
-    border-color: #7dd636;
+    background: var(--green-mid);
+    border-color: var(--green-mid);
   }
 
   /* ── FOOTER ── */
   footer {
     padding: 32px 48px;
-    border-top: 1px solid rgba(105,190,40,0.06);
+    border-top: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -537,7 +531,7 @@
   .footer-links a {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
-    color: rgba(245,242,237,0.2);
+    color: var(--light-muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     transition: color 0.2s;
