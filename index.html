@@ -244,6 +244,15 @@ nav {
 
 .section.flip .s-visual { order: -1; }
 
+/* Text hugs center spine: when text is on left (default), push it right;
+   when text is on right (flip), it naturally sits near center already */
+.section:not(.flip) .s-copy {
+  margin-left: auto;
+}
+.section.flip .s-copy {
+  margin-right: auto;
+}
+
 .section.warm { background: var(--paper-warm); }
 
 /* Dark band sections — full-width dark with light text */
