@@ -714,17 +714,31 @@ footer::before {
   </div>
 </section>
 
-<!-- ═══════════ 01 HERMES — light ═══════════ -->
+<!-- ═══════════ 01 MISSION CONTROL — light ═══════════ -->
 <section class="section" id="work">
   <div class="s-copy">
     <div class="s-num">01</div>
+    <div class="s-tag">Operations Dashboard</div>
+    <div class="s-title">Mission <em>Control</em></div>
+    <div class="s-desc">Every agent, every cron, every system — one screen. I built a real-time command center to monitor the entire operation. The gauges and health bars are modeled after GoldenEye N64 — chunky segmented rings with 3D shadows instead of the usual thin arcs. System integrity, content engine, Hermes radar, cron health bars, pipeline metrics. If something breaks at 2 AM, this is how I know.</div>
+    <div class="s-stack">Vanilla HTML / CSS / JS / Supabase REST / GoldenEye-inspired gauge engine</div>
+  </div>
+  <div class="s-visual">
+    <div class="s-screenshot"><img src="/screenshots/commander-dashboard.png" alt="SPECTRE Mission Control Dashboard"></div>
+  </div>
+</section>
+
+<!-- ═══════════ 02 HERMES — dark ═══════════ -->
+<section class="section flip dark">
+  <div class="s-copy">
+    <div class="s-num">02</div>
     <div class="s-tag">Autonomous Distribution</div>
     <div class="s-title"><em>Hermes</em></div>
     <div class="s-desc">This is the engine the Bond villains manage. Hermes is an always-on autonomous agent that prospects, crafts personalized messages in six languages, surfaces reply opportunities on X, and monitors for product launches. The agents above tell it what to do. It runs around the clock and posts everything to Slack for my sign-off.</div>
     <div class="s-stack">Hetzner / Codex CLI / Slack API / Supabase / Firecrawl / systemd</div>
   </div>
   <div class="s-visual">
-    <div class="s-terminal">
+    <div class="s-terminal" style="background: var(--terminal); border-color: rgba(105,190,40,0.12);">
       <div class="slack-head">hermes-updates</div>
       <div class="slack-line">
         <span class="sl-tag">[PITCH-SENT]</span>
@@ -755,10 +769,10 @@ footer::before {
   </div>
 </section>
 
-<!-- ═══════════ 02 ACTIVITY BRIDGE — dark ═══════════ -->
-<section class="section flip dark">
+<!-- ═══════════ 03 ACTIVITY BRIDGE — warm ═══════════ -->
+<section class="section warm">
   <div class="s-copy">
-    <div class="s-num">02</div>
+    <div class="s-num">03</div>
     <div class="s-tag">Always-On Sync</div>
     <div class="s-title">Activity <em>Bridge</em></div>
     <div class="s-desc">I go on a ruck, talk to Hermes through voice-to-Slack on my phone, make decisions, explore leads, think out loud. When I sit back down, Claude Code already knows everything that happened. No copy-pasting, no "let me catch you up." A daemon on my machine captures every Hermes conversation to a local log. The next session starts fully caught up.</div>
@@ -781,10 +795,10 @@ footer::before {
   </div>
 </section>
 
-<!-- ═══════════ 03 CLAUDE ACADEMY — warm ═══════════ -->
-<section class="section warm">
+<!-- ═══════════ 04 CLAUDE ACADEMY — dark ═══════════ -->
+<section class="section flip dark">
   <div class="s-copy">
-    <div class="s-num">03</div>
+    <div class="s-num">04</div>
     <div class="s-tag">Education</div>
     <div class="s-title">Claude <em>Academy</em></div>
     <div class="s-desc">I think Claude fluency is the most important language to learn right now. So I built a free course and translated it into seven languages. The dream is someone in a far-off country picks this up, builds something real, and never needed to speak English to get there. Creator affiliate program with Stripe-wired revenue share built in.</div>
@@ -796,10 +810,10 @@ footer::before {
   </div>
 </section>
 
-<!-- ═══════════ 04 GABRIELLA AMOURA — dark ═══════════ -->
-<section class="section flip dark">
+<!-- ═══════════ 05 GABRIELLA AMOURA — warm ═══════════ -->
+<section class="section warm">
   <div class="s-copy">
-    <div class="s-num">04</div>
+    <div class="s-num">05</div>
     <div class="s-tag">Autonomous E-commerce</div>
     <div class="s-title">Gabriella <em>Amoura</em></div>
     <div class="s-desc">A fully autonomous DTC diamond jewelry brand. Cron jobs generate product-framed content daily, post to Instagram and TikTok, and rotate seasonal campaigns without anyone touching it. Stripe checkout, transactional email, creator affiliate program all wired end-to-end. The whole GTM runs on autopilot.</div>
@@ -811,10 +825,10 @@ footer::before {
   </div>
 </section>
 
-<!-- ═══════════ 05 AI PERSONA FACTORY — warm ═══════════ -->
-<section class="section warm">
+<!-- ═══════════ 06 AI PERSONA FACTORY — dark ═══════════ -->
+<section class="section flip dark">
   <div class="s-copy">
-    <div class="s-num">05</div>
+    <div class="s-num">06</div>
     <div class="s-tag">Automated Content</div>
     <div class="s-title">AI Persona <em>Factory</em></div>
     <div class="s-desc">I automated the entire UGC pipeline. Image generation, video creation, and posting to TikTok all run automatically. The system uses a hero image as identity-lock reference so every downstream generation matches face, body, and wardrobe. New characters spin up in minutes with full scene libraries and platform-ready content.</div>
@@ -828,10 +842,10 @@ footer::before {
   </div>
 </section>
 
-<!-- ═══════════ 06 SLOANE — dark ═══════════ -->
-<section class="section flip dark">
+<!-- ═══════════ 07 SLOANE — warm ═══════════ -->
+<section class="section warm">
   <div class="s-copy">
-    <div class="s-num">06</div>
+    <div class="s-num">07</div>
     <div class="s-tag">Voice Agent</div>
     <div class="s-title"><em>Sloane</em></div>
     <div class="s-desc">I saw a gap in AI agents for law firms so I built a 24/7 receptionist. Real phone number. Picks up, takes the case, structures the data, and hands the warm lead to a human. Never misses a call, never takes a day off.</div>
@@ -843,10 +857,10 @@ footer::before {
   </div>
 </section>
 
-<!-- ═══════════ 07 MEMORY SYSTEM — light ═══════════ -->
-<section class="section">
+<!-- ═══════════ 08 MEMORY SYSTEM — warm ═══════════ -->
+<section class="section warm">
   <div class="s-copy">
-    <div class="s-num">07</div>
+    <div class="s-num">08</div>
     <div class="s-tag">Context System</div>
     <div class="s-title">Memory <em>System</em></div>
     <div class="s-desc">I was constantly updating Obsidian notes and realized Claude forgot everything between sessions anyway. So I built a tiered memory core. A lean state file auto-loads every conversation, an indexed memory routes to 80+ topic files, and a digest layer summarizes the long tail. Every agent in the roster reads from the same brain.</div>
@@ -869,10 +883,10 @@ footer::before {
   </div>
 </section>
 
-<!-- ═══════════ 08 A TEAM — dark ═══════════ -->
+<!-- ═══════════ 09 A TEAM — dark ═══════════ -->
 <section class="section flip dark">
   <div class="s-copy">
-    <div class="s-num">08</div>
+    <div class="s-num">09</div>
     <div class="s-tag">B2B AI Enablement</div>
     <div class="s-title">A <em>Team</em></div>
     <div class="s-desc">AI consulting for businesses that want to actually get started with AI. Not theory, not demos. Hands-on implementation that gets teams building with Claude, automating workflows, and shipping real output.</div>
