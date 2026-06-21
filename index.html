@@ -529,6 +529,60 @@ nav {
   background: var(--green-muted); border-color: var(--green-muted);
 }
 
+/* Contact form */
+.contact-form { max-width: 540px; margin-top: 8px; }
+.contact-form .field { margin-bottom: 18px; }
+.contact-form label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--dim); margin-bottom: 8px;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  font-family: inherit; font-size: 15px; color: var(--ink);
+  background: rgba(17,23,20,0.02);
+  border: 1px solid rgba(17,23,20,0.12);
+  border-radius: 10px;
+  padding: 13px 15px;
+  transition: border-color .2s, background .2s;
+  -webkit-appearance: none;
+}
+.contact-form textarea { resize: vertical; min-height: 120px; line-height: 1.5; }
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--green-muted);
+  background: rgba(76,175,80,0.04);
+}
+.contact-form .hp {
+  position: absolute; left: -9999px; width: 1px; height: 1px;
+  overflow: hidden;
+}
+.contact-form button {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 13px 28px; border-radius: 100px;
+  background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); cursor: pointer;
+  transition: all .2s;
+}
+.contact-form button:hover:not(:disabled) {
+  background: var(--green-muted); border-color: var(--green-muted);
+}
+.contact-form button:disabled { opacity: 0.5; cursor: default; }
+.form-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; margin-top: 14px; min-height: 18px;
+}
+.form-status.err { color: #c0392b; }
+.form-status.ok { color: var(--green-muted); }
+.form-sent {
+  font-family: 'Instrument Serif', serif;
+  font-size: 24px; color: var(--green-muted); margin-top: 8px;
+}
+
 /* ═══════════ FOOTER ═══════════ */
 footer {
   background: var(--terminal);
@@ -561,11 +615,13 @@ footer::before {
   display: flex; justify-content: space-between; align-items: flex-end;
 }
 
-.foot-left span {
+.foot-left span,
+.foot-left a {
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px; color: rgba(232,228,220,0.25);
   letter-spacing: 0.08em;
   display: block;
+  text-decoration: none;
 }
 
 .foot-left .foot-loc {
@@ -660,7 +716,7 @@ footer::before {
     <a href="#contact">Contact</a>
     <a href="https://linkedin.com/in/reid-chong07" target="_blank">LinkedIn</a>
     <a href="https://github.com/Rchong01010" target="_blank">GitHub</a>
-    <a class="talk" href="https://calendar.app.google/LvRVrXd99ybNrNgX8" target="_blank">Talk</a>
+    <a class="talk" href="#contact">Talk</a>
   </div>
 </nav>
 
@@ -913,10 +969,31 @@ footer::before {
 <!-- ═══════════ CONTACT ═══════════ -->
 <section class="contact" id="contact">
   <h2>Let's <em>talk.</em></h2>
-  <p>If something here caught your eye.</p>
-  <div class="contact-row">
-    <a class="primary" href="https://calendar.app.google/LvRVrXd99ybNrNgX8" target="_blank">Book a call</a>
-    <a href="mailto:reid@getateam.ai">Email</a>
+  <p>If something here caught your eye, drop me a line.</p>
+
+  <form class="contact-form" id="contactForm" novalidate>
+    <div class="field">
+      <label for="cf-name">Name</label>
+      <input type="text" id="cf-name" name="name" maxlength="200" autocomplete="name" required>
+    </div>
+    <div class="field">
+      <label for="cf-email">Email</label>
+      <input type="email" id="cf-email" name="email" maxlength="320" autocomplete="email" required>
+    </div>
+    <div class="field">
+      <label for="cf-message">Message</label>
+      <textarea id="cf-message" name="message" maxlength="5000" required></textarea>
+    </div>
+    <!-- honeypot: hidden from humans, bots fill it -->
+    <div class="hp" aria-hidden="true">
+      <label for="cf-company">Company URL</label>
+      <input type="text" id="cf-company" name="company_url" tabindex="-1" autocomplete="off">
+    </div>
+    <button type="submit" id="cf-submit">Send message</button>
+    <div class="form-status" id="cf-status" role="status" aria-live="polite"></div>
+  </form>
+
+  <div class="contact-row" style="margin-top:32px;">
     <a href="https://linkedin.com/in/reid-chong07" target="_blank">LinkedIn</a>
     <a href="https://github.com/Rchong01010" target="_blank">GitHub</a>
   </div>
@@ -927,20 +1004,71 @@ footer::before {
   <div class="foot-row">
     <div class="foot-left">
       <span class="foot-loc">San Diego, California</span>
-      <span>reid@getateam.ai</span>
+      <a href="#contact">Get in touch</a>
     </div>
     <div class="foot-links">
       <a href="https://linkedin.com/in/reid-chong07" target="_blank">LinkedIn</a>
       <a href="https://github.com/Rchong01010" target="_blank">GitHub</a>
       <a href="https://substack.com/@reid906491" target="_blank">Substack</a>
-      <a href="mailto:reid@getateam.ai">Email</a>
-      <a href="https://calendar.app.google/LvRVrXd99ybNrNgX8" target="_blank">Book a call</a>
+      <a href="#contact">Contact</a>
     </div>
   </div>
 </footer>
 
 <script>
 setTimeout(function(){var K="sb_publishable_lKjfMY-OCLFk2f5cuCpGVA_p0Lm7vU8",U="https://yaiuujiducipbdzdbzrl.supabase.co/rest/v1/page_views",id=sessionStorage.getItem("pv_sid");if(!id){id=Math.random().toString(36).slice(2)+Date.now().toString(36);sessionStorage.setItem("pv_sid",id)}try{fetch(U,{method:"POST",keepalive:true,headers:{"apikey":K,"Authorization":"Bearer "+K,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify({property:"reidchong",path:location.pathname,session_id:id,referrer:document.referrer||null})})}catch(e){}},0);
+
+(function(){
+  var form = document.getElementById("contactForm");
+  if (!form) return;
+  var btn = document.getElementById("cf-submit");
+  var status = document.getElementById("cf-status");
+  var ENDPOINT = "https://yaiuujiducipbdzdbzrl.supabase.co/functions/v1/contact-submit";
+  var APIKEY = "sb_publishable_lKjfMY-OCLFk2f5cuCpGVA_p0Lm7vU8";
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    status.className = "form-status";
+    status.textContent = "";
+
+    var payload = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      message: form.message.value.trim(),
+      honeypot: form.company_url.value
+    };
+    if (!payload.name || !payload.email || !payload.message) {
+      status.className = "form-status err";
+      status.textContent = "Please fill in your name, email, and message.";
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+
+    fetch(ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "apikey": APIKEY },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      return res.json().then(function(data){ return { ok: res.ok, status: res.status, data: data }; });
+    }).then(function(r){
+      if (r.ok && r.data && r.data.success) {
+        form.innerHTML = '<div class="form-sent">Message sent. I\'ll get back to you soon.</div>';
+        return;
+      }
+      status.className = "form-status err";
+      status.textContent = (r.data && r.data.error) || "Something went wrong. Please try again.";
+      btn.disabled = false;
+      btn.textContent = "Send message";
+    }).catch(function(){
+      status.className = "form-status err";
+      status.textContent = "Network error. Please try again, or reach out on LinkedIn.";
+      btn.disabled = false;
+      btn.textContent = "Send message";
+    });
+  });
+})();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
