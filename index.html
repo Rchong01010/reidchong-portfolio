@@ -434,57 +434,6 @@ nav {
 }
 .s-screenshot.pair img { object-position: center top; }
 
-/* ═══════════ CONTEXT BAND ═══════════ */
-.context-band {
-  background: var(--ink);
-  padding: clamp(48px, 6vw, 80px) clamp(24px, 4vw, 56px);
-  border-top: 2px solid var(--green-bright);
-}
-
-.ctx-inner {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: clamp(40px, 5vw, 80px);
-  align-items: center;
-}
-
-.ctx-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--green-bright); margin-bottom: 16px;
-}
-
-.ctx-text {
-  font-size: 16px; line-height: 1.75;
-  color: rgba(232,228,220,0.6);
-  max-width: 520px;
-}
-
-.ctx-stats {
-  display: flex; gap: clamp(24px, 3vw, 48px);
-}
-
-.ctx-stat { display: flex; flex-direction: column; gap: 4px; }
-
-.ctx-val {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(36px, 4vw, 52px);
-  font-weight: 400; font-style: italic;
-  color: var(--green-bright);
-  line-height: 1;
-}
-
-.ctx-key {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(232,228,220,0.35);
-}
-
-@media (max-width: 900px) {
-  .ctx-inner { grid-template-columns: 1fr; }
-  .ctx-stats { justify-content: space-between; }
-}
-
 /* ═══════════ CONTACT ═══════════ */
 .contact {
   padding: clamp(80px, 10vw, 140px) clamp(24px, 4vw, 56px);
