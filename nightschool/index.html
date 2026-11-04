@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nightschool AI · Case Study | Reid Chong</title>
-<meta name="description" content="How I grew Nightschool AI from 230 to 1,444 signups a month in three months across 14 languages, survived a forced rebrand, and run the product with an AI agent team.">
+<meta name="description" content="How I grew Nightschool AI from 230 to 1,444 signups a month in three months across 14 languages, survived a forced rebrand, and run it with an AI agent team.">
 <meta property="og:title" content="Nightschool AI · Case Study | Reid Chong">
 <meta property="og:description" content="230 to 1,444 signups a month in three months. Lesson-completion rate up from 29% to 51%. How I grew a self-serve AI-learning product across 14 languages, survived a forced rebrand, and run it with an AI agent team.">
 <meta property="og:url" content="https://reidchong.com/nightschool">
@@ -338,6 +338,38 @@ footer {
 }
 .foot-links a:hover { color: var(--green-muted); }
 
+
+/* ═══════════ ITERATION LOG ═══════════ */
+.power-note { font-size: 15px; line-height: 1.7; color: var(--ink-soft); background: var(--paper-warm); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; margin: 8px 0 20px; max-width: none; }
+.iter { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; margin-top: 14px; }
+.iter-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+.iter h3 { font-family: 'Instrument Serif', serif; font-size: 21px; font-weight: 400; line-height: 1.2; }
+.iter-status { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); white-space: nowrap; }
+.iter dl { display: grid; grid-template-columns: 92px 1fr; gap: 8px 14px; }
+.iter dt { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-muted); padding-top: 4px; }
+.iter dd { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
+
+/* ═══════════ ARCH DIAGRAM ═══════════ */
+.arch-wrap { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: clamp(12px, 2.5vw, 24px); margin-top: 8px; overflow-x: auto; }
+.arch-svg { width: 100%; min-width: 540px; height: auto; display: block; }
+.a-box { fill: #fff; stroke: var(--line); }
+.a-warm { fill: var(--paper-warm); stroke: var(--line); }
+.a-ink { fill: var(--ink); stroke: var(--ink); }
+.a-t { font-family: 'JetBrains Mono', monospace; font-size: 11px; fill: var(--ink); text-anchor: middle; }
+.a-s { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; fill: var(--dim); text-anchor: middle; }
+.a-inv { fill: var(--paper); }
+.a-line { stroke: var(--green-muted); stroke-width: 1.4; fill: none; }
+
+/* ═══════════ TRACE ═══════════ */
+.trace { background: var(--paper-warm); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; margin-top: 18px; }
+.trace h3 { font-family: 'Instrument Serif', serif; font-size: 20px; font-weight: 400; margin-bottom: 10px; }
+.trace p { font-size: 14.5px; max-width: none; }
+.fail-list { list-style: none; margin-top: 8px; }
+.fail-list li { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); padding: 12px 0; border-top: 1px solid var(--line); }
+.fail-list li:first-child { border-top: none; }
+.fail-list b { font-weight: 500; color: var(--ink); }
+@media (max-width: 600px) { .iter dl { grid-template-columns: 1fr; gap: 2px; } .iter dd { margin-bottom: 8px; } }
+
 /* ═══════════ MOBILE ═══════════ */
 @media (max-width: 600px) {
   .proof-list a { flex-direction: column; align-items: flex-start; gap: 4px; }
@@ -452,65 +484,118 @@ footer {
     </div>
   </section>
 
-  <!-- HOW I RUN GROWTH -->
-  <section class="case-section">
+  <!-- GROWTH ITERATIONS -->
+  <section class="case-section" id="iterations">
     <div class="section-label">Method</div>
-    <h2>How I run <em>growth</em></h2>
-    <div class="growth-grid">
-      <div class="growth-card">
-        <span class="growth-tag">Retention</span>
-        <h3>Win-back email</h3>
-        <p>I hold out 100 users from every win-back send and measure the campaign against that holdout, not against a before-and-after average.</p>
-      </div>
-      <div class="growth-card">
-        <span class="growth-tag">Pricing</span>
-        <h3>Paywall test</h3>
-        <p>Before a paywall test ships, I set a guardrail: if new-cohort checkout-to-paid falls below 15%, the test rolls back automatically. No waiting for someone to notice.</p>
-      </div>
-      <div class="growth-card">
-        <span class="growth-tag">Funnel</span>
-        <h3>Sign-in leak</h3>
-        <p>78% of visitors who reached sign-in left without trying the product. I rerouted the primary buttons to account creation instead, and measure the change on the step-by-step sign-in funnel.</p>
-      </div>
+    <h2>The growth <em>iteration log</em></h2>
+    <p>Each test is written up before it starts, with a metric, a data source, a baseline, a readout date and a kill bar. Ideas come from data, user behavior and what other growth teams publish. A claim stays a hypothesis until our own numbers move.</p>
+    <p class="power-note"><b>On statistical power.</b> At today&rsquo;s volume most single tests can&rsquo;t reach significance. So I lean on holdouts, guardrails set before launch, one change per test and kill dates, and I say plainly which results are reproduced and which are not.</p>
+    <div class="iter">
+      <div class="iter-top"><h3><span class="growth-tag">Acquisition · AI answers</span><br>Diagnose lost questions before writing new pages</h3><span class="iter-status">Running · rerun after 14 days</span></div>
+      <dl>
+        <dt>Saw</dt><dd>I tracked 24 buyer questions (English, German, Spanish) in Google and AI-assistant answers. We were cited in 0 of 24. Reddit was cited in 22 and YouTube in 17.</dd>
+        <dt>Changed</dt><dd>I sorted each lost question by cause before building anything: 11 weak pages, 8 won by third-party sources, 5 indexing issues, 0 missing pages. I then rewrote the 8 weakest pages answer-first in 14 languages. A manual Search Console check showed 3 of the &ldquo;indexing&rdquo; pages were indexed after all, so my own proxy was wrong and I corrected the diagnosis.</dd>
+        <dt>Measure</dt><dd>Rerun the same 24 questions in Google and two AI answer engines 14 days after release. Secondary metrics: non-branded clicks and signups referred by AI assistants.</dd>
+      </dl>
+    </div>
+    <div class="iter">
+      <div class="iter-top"><h3><span class="growth-tag">Acquisition · search</span><br>Kill a test before building it</h3><span class="iter-status">Deprioritized on data</span></div>
+      <dl>
+        <dt>Saw</dt><dd>The idea was to rewrite titles on locale pages with impressions and a click-through rate under 1%.</dd>
+        <dt>Changed</dt><dd>I pulled 710 pages (14,089 impressions). The biggest low-CTR pages were homepages whose queries were the old brand name. That traffic belongs to another company, so rewriting titles can&rsquo;t win it and shouldn&rsquo;t try. Only two real candidates were left.</dd>
+        <dt>Measure</dt><dd>I logged it as small and moved it below the next tests. One data pull saved a week of work.</dd>
+      </dl>
+    </div>
+    <div class="iter">
+      <div class="iter-top"><h3><span class="growth-tag">Activation</span><br>The sign-in leak</h3><span class="iter-status">Shipped</span></div>
+      <dl>
+        <dt>Saw</dt><dd>Event data showed 78% of visitors who reached sign-in left without trying the product.</dd>
+        <dt>Changed</dt><dd>I rerouted the primary buttons to account creation instead of sign-in.</dd>
+        <dt>Measure</dt><dd>I measure it on the step-by-step sign-in funnel. Over May to August, the share of signups who finished a first lesson rose from 29% to 51%. That is a cohort trend, not a result I attribute to this one change.</dd>
+      </dl>
+    </div>
+    <div class="iter">
+      <div class="iter-top"><h3><span class="growth-tag">Monetization · checkout</span><br>Walk the purchase path as a stranger</h3><span class="iter-status">Shipped · readout pending</span></div>
+      <dl>
+        <dt>Saw</dt><dd>In 72 hours there were 9 real checkout starts and 0 payments.</dd>
+        <dt>Changed</dt><dd>An agent walked the checkout signed out, on desktop, on mobile and in German, without ever paying. It found the payment page called every kit &ldquo;Build your first kit&rdquo; and never said what the buyer gets or when. It also found the German page switched currency, and on mobile the Buy button sat below the fold. I shipped a fix that names the kit, says what arrives and recovers abandoned checkouts. An independent review on the exact code verified that charge amounts come only from server-side prices.</dd>
+        <dt>Measure</dt><dd>Checkout start to submitted payment to paid, by flow and locale, read on real purchases only.</dd>
+      </dl>
+    </div>
+    <div class="iter">
+      <div class="iter-top"><h3><span class="growth-tag">Monetization · B2B</span><br>Show the team price</h3><span class="iter-status">Shipped · 30-day readout</span></div>
+      <dl>
+        <dt>Saw</dt><dd>Every AI-cited answer about training cost showed a price. Ours said &ldquo;we send a quote.&rdquo;</dd>
+        <dt>Changed</dt><dd>I made team pricing public at US$99 per seat per year (10+ seats) in 14 languages.</dd>
+        <dt>Measure</dt><dd>Team inquiries and team checkouts for 30 days after release, against the 30 days before.</dd>
+      </dl>
+    </div>
+    <div class="iter">
+      <div class="iter-top"><h3><span class="growth-tag">Retention · pricing</span><br>Guardrails before the test, not after</h3><span class="iter-status">Designed in</span></div>
+      <dl>
+        <dt>Saw</dt><dd>Small volume means a bad test can quietly cost real sales.</dd>
+        <dt>Changed</dt><dd>Every win-back send holds out 100 users. Every paywall test carries an automatic rollback if new-cohort checkout-to-paid drops below 15%.</dd>
+        <dt>Measure</dt><dd>The campaign is read against its holdout, never against a before-and-after average.</dd>
+      </dl>
+    </div>
+    <div class="iter">
+      <div class="iter-top"><h3><span class="growth-tag">Measurement</span><br>Count real people</h3><span class="iter-status">Shipped</span></div>
+      <dl>
+        <dt>Saw</dt><dd>About 60% of analytics &ldquo;active users&rdquo; were bots.</dd>
+        <dt>Changed</dt><dd>I filtered bot traffic, and I count users from accounts in the product database instead of analytics sessions.</dd>
+        <dt>Measure</dt><dd>Every readout says where its number came from and whether it was reproduced or is still a hypothesis.</dd>
+      </dl>
     </div>
   </section>
 
   <!-- OPERATING SYSTEM -->
-  <section class="case-section">
+  <section class="case-section" id="system">
     <div class="section-label">Operations</div>
-    <h2>The operating <em>system</em></h2>
-    <svg class="os-diagram" viewBox="0 0 320 420" role="img" aria-label="Flow diagram: idea or data leads to AI worker agents building, then an independent reviewer agent and CI judging every change, then live probes checking the purchase path, then I decide and merge">
-      <defs>
-        <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M0,0 L10,5 L0,10 z" fill="var(--green-muted)"/>
-        </marker>
-      </defs>
-
-      <rect x="20" y="8" width="280" height="48" rx="8" fill="#fff" stroke="var(--line)"/>
-      <text x="160" y="36" class="os-box-text">Idea / data</text>
-
-      <line x1="160" y1="56" x2="160" y2="84" stroke="var(--green-muted)" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-      <rect x="20" y="88" width="280" height="48" rx="8" fill="#fff" stroke="var(--line)"/>
-      <text x="160" y="116" class="os-box-text">AI worker agents build</text>
-
-      <line x1="160" y1="136" x2="160" y2="164" stroke="var(--green-muted)" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-      <rect x="20" y="168" width="280" height="56" rx="8" fill="#fff" stroke="var(--line)"/>
-      <text x="160" y="193" class="os-box-text">Independent reviewer agent</text>
-      <text x="160" y="211" class="os-box-text">+ CI judge every change</text>
-
-      <line x1="160" y1="224" x2="160" y2="252" stroke="var(--green-muted)" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-      <rect x="20" y="256" width="280" height="48" rx="8" fill="#fff" stroke="var(--line)"/>
-      <text x="160" y="284" class="os-box-text">Live probes check the purchase path</text>
-
-      <line x1="160" y1="304" x2="160" y2="332" stroke="var(--green-muted)" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-      <rect x="20" y="336" width="280" height="48" rx="8" fill="var(--ink)" stroke="var(--ink)"/>
-      <text x="160" y="364" class="os-box-text" style="fill:var(--paper)">I decide and merge</text>
-    </svg>
-    <p class="os-sentence">I run the company with an agent team. Nothing ships on the word of the agent that built it.</p>
+    <h2>The agent system that <em>runs the iterations</em></h2>
+    <p>I built a multi-agent system to do the research, analysis, prototyping and experiment operations behind every card above. An orchestrator turns a goal into a written brief: the goal, what &ldquo;done&rdquo; means, the limits and what was already tried. Cloud workers each build in their own copy of the code. Nothing ships on the word of the agent that built it.</p>
+    <div class="stat-row" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:22px 0 8px;">
+      <div class="growth-card"><span style="font-family:'Instrument Serif',serif;font-size:34px;display:block;line-height:1;margin-bottom:8px;">296</span><span class="iter-status" style="white-space:normal;">changes merged in 30 days</span></div>
+      <div class="growth-card"><span style="font-family:'Instrument Serif',serif;font-size:34px;display:block;line-height:1;margin-bottom:8px;">286</span><span class="iter-status" style="white-space:normal;">of them built by agents</span></div>
+      <div class="growth-card"><span style="font-family:'Instrument Serif',serif;font-size:34px;display:block;line-height:1;margin-bottom:8px;">60+</span><span class="iter-status" style="white-space:normal;">scheduled agent loops</span></div>
+      <div class="growth-card"><span style="font-family:'Instrument Serif',serif;font-size:34px;display:block;line-height:1;margin-bottom:8px;">4,100+</span><span class="iter-status" style="white-space:normal;">logged loop runs in 30 days</span></div>
+    </div>
+    <p class="chart-caption">Source: code-merge history and the loop run log, Oct 5 to Nov 4, 2026.</p>
+    <div class="arch-wrap" style="margin-top:22px;">
+      <svg class="arch-svg" viewBox="0 0 640 690" role="img" aria-label="Flow: a goal or data goes to the orchestrator, which writes a brief for three parallel cloud workers. Their pull request passes CI checks, an independent reviewer and a second-vendor review, then a tier check by files changed. Content, copy, translations and tests merge automatically; auth, database, dependencies and spend go to me. After deploy, a live probe walks the purchase path.">
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--green-muted)"/></marker></defs>
+        <rect class="a-box" x="200" y="10" width="240" height="40" rx="8"/><text class="a-t" x="320" y="35">Goal, data or idea</text>
+        <path class="a-line" d="M320 50 V76" marker-end="url(#ah)"/>
+        <rect class="a-box" x="110" y="80" width="420" height="52" rx="8"/><text class="a-t" x="320" y="101">Orchestrator</text><text class="a-s" x="320" y="119">writes the brief: goal, done means, limits, prior attempts</text>
+        <path class="a-line" d="M320 132 C320 152 105 150 105 172" marker-end="url(#ah)"/><path class="a-line" d="M320 132 V172" marker-end="url(#ah)"/><path class="a-line" d="M320 132 C320 152 535 150 535 172" marker-end="url(#ah)"/>
+        <rect class="a-box" x="20" y="176" width="170" height="48" rx="8"/><text class="a-t" x="105" y="197">Cloud worker</text><text class="a-s" x="105" y="213">own copy of the code</text>
+        <rect class="a-box" x="235" y="176" width="170" height="48" rx="8"/><text class="a-t" x="320" y="197">Cloud worker</text><text class="a-s" x="320" y="213">own copy of the code</text>
+        <rect class="a-box" x="450" y="176" width="170" height="48" rx="8"/><text class="a-t" x="535" y="197">Cloud worker</text><text class="a-s" x="535" y="213">own copy of the code</text>
+        <path class="a-line" d="M105 224 C105 246 320 244 320 262" marker-end="url(#ah)"/><path class="a-line" d="M320 224 V262" marker-end="url(#ah)"/><path class="a-line" d="M535 224 C535 246 320 244 320 262" marker-end="url(#ah)"/>
+        <rect class="a-box" x="220" y="266" width="200" height="40" rx="8"/><text class="a-t" x="320" y="291">Pull request</text>
+        <path class="a-line" d="M320 306 C320 326 105 324 105 346" marker-end="url(#ah)"/><path class="a-line" d="M320 306 V346" marker-end="url(#ah)"/><path class="a-line" d="M320 306 C320 326 535 324 535 346" marker-end="url(#ah)"/>
+        <rect class="a-warm" x="20" y="350" width="170" height="48" rx="8"/><text class="a-t" x="105" y="371">CI checks</text><text class="a-s" x="105" y="387">lint, types, tests, locales</text>
+        <rect class="a-warm" x="235" y="350" width="170" height="48" rx="8"/><text class="a-t" x="320" y="371">Independent reviewer</text><text class="a-s" x="320" y="387">never the author</text>
+        <rect class="a-warm" x="450" y="350" width="170" height="48" rx="8"/><text class="a-t" x="535" y="371">Second vendor</text><text class="a-s" x="535" y="387">OpenAI Codex review</text>
+        <path class="a-line" d="M105 398 C105 420 320 418 320 438" marker-end="url(#ah)"/><path class="a-line" d="M320 398 V438" marker-end="url(#ah)"/><path class="a-line" d="M535 398 C535 420 320 418 320 438" marker-end="url(#ah)"/>
+        <rect class="a-box" x="140" y="442" width="360" height="48" rx="8"/><text class="a-t" x="320" y="463">Tier check</text><text class="a-s" x="320" y="479">set by the files changed, never by the author</text>
+        <path class="a-line" d="M320 490 C320 510 175 510 175 530" marker-end="url(#ah)"/><path class="a-line" d="M320 490 C320 510 465 510 465 530" marker-end="url(#ah)"/>
+        <rect class="a-warm" x="40" y="534" width="270" height="52" rx="8"/><text class="a-t" x="175" y="555">Merges automatically</text><text class="a-s" x="175" y="573">content, copy, translations, tests</text>
+        <rect class="a-ink" x="330" y="534" width="270" height="52" rx="8"/><text class="a-t a-inv" x="465" y="555">I decide</text><text class="a-s a-inv" x="465" y="573">auth, database, dependencies, spend</text>
+        <path class="a-line" d="M175 586 C175 606 320 604 320 622" marker-end="url(#ah)"/><path class="a-line" d="M465 586 C465 606 320 604 320 622" marker-end="url(#ah)"/>
+        <rect class="a-box" x="140" y="626" width="360" height="52" rx="8"/><text class="a-t" x="320" y="647">Deploy, then a live probe</text><text class="a-s" x="320" y="665">walks the purchase path as a signed-out visitor</text>
+      </svg>
+    </div>
+    <p style="margin-top:20px;">Scheduled loops run the experiment operations: experiment readouts on their dates, AI-answer citation checks, nightly translation into 13 more languages with parity and accent checks, and ops watchdogs. Every loop names a verifier other than itself. Money, outbound messages and deletions always stop for a human.</p>
+    <div class="trace">
+      <h3>Example: a wrong number caught before it published</h3>
+      <p>A worker drafted a guide page that quoted a statistic from a public source. The independent reviewer checked the source and found the worker had counted the wrong thing. The worker corrected the figure against an exact-phrase match of the source, re-ran every check and updated the change notes. Only then did the page merge (Nov 2, 2026).</p>
+    </div>
+    <h3 style="font-family:'Instrument Serif',serif;font-size:22px;font-weight:400;margin:34px 0 6px;">What broke, and what I changed</h3>
+    <ul class="fail-list">
+      <li><b>Green logs, frozen data.</b> An analytics collector ran on schedule for 18 days and wrote no rows. The verifier now checks the output data, not the log.</li>
+      <li><b>Workers refusing work.</b> 2 of about 10 cloud workers refused a task as an unverified message. Every brief now carries a short provenance and rules block, and refusals dropped to 1 in the next 9.</li>
+      <li><b>Build cost.</b> Preview builds were most of the hosting bill. Every brief now says commit locally, run checks locally and push once.</li>
+    </ul>
   </section>
 
   <!-- LIVE PROOF -->
@@ -522,9 +607,10 @@ footer {
       <li><a href="https://nightschoolai.com/es/courses/chatgpt-first-week-at-work" target="_blank" rel="noopener"><span class="proof-name">ChatGPT: your first week at work · Español</span><span class="proof-url">/es/courses/chatgpt-first-week-at-work</span></a></li>
       <li><a href="https://nightschoolai.com/ja/courses/chatgpt-first-week-at-work" target="_blank" rel="noopener"><span class="proof-name">ChatGPT: your first week at work · 日本語</span><span class="proof-url">/ja/courses/chatgpt-first-week-at-work</span></a></li>
       <li><a href="https://nightschoolai.com/build-your-first" target="_blank" rel="noopener"><span class="proof-name">Build-your-own-agent kits</span><span class="proof-url">/build-your-first</span></a></li>
+      <li><a href="https://nightschoolai.com/build-your-first/hermes-agent" target="_blank" rel="noopener"><span class="proof-name">Kit: build your first Hermes Agent (Nous Research&rsquo;s open-source agent)</span><span class="proof-url">/build-your-first/hermes-agent</span></a></li>
       <li><a href="https://www.youtube.com/@NightschoolAI" target="_blank" rel="noopener"><span class="proof-name">Short-form video</span><span class="proof-url">youtube.com/@NightschoolAI</span></a></li>
     </ul>
-    <p class="proof-disclaimer">Nightschool AI is independent and not affiliated with OpenAI, Anthropic, Microsoft, or Google.</p>
+    <p class="proof-disclaimer">Nightschool AI is independent and not affiliated with OpenAI, Anthropic, Microsoft, Google, or Nous Research.</p>
   </section>
 
 </main>
