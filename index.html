@@ -351,6 +351,8 @@ nav {
 .s-link:hover { gap: 14px; }
 .s-link::after { content: '→'; color: var(--green-bright); font-size: 13px; }
 
+.s-links { display: flex; gap: 20px; flex-wrap: wrap; }
+
 /* ═══════════ VISUAL BLOCKS ═══════════ */
 
 /* Screenshots */
@@ -871,7 +873,10 @@ footer::before {
     <div class="s-title">Nightschool <em>AI</em></div>
     <div class="s-desc">I think Claude fluency is the most important language to learn right now. So I built a free course and translated it into fourteen languages. The dream is someone in a far-off country picks this up, builds something real, and never needed to speak English to get there. Creator affiliate program with Stripe-wired revenue share built in.</div>
     <div class="s-stack">Next.js / Supabase / Stripe / 14-locale i18n</div>
-    <a class="s-link" href="https://nightschoolai.com" target="_blank">nightschoolai.com</a>
+    <div class="s-links">
+      <a class="s-link" href="https://nightschoolai.com" target="_blank">nightschoolai.com</a>
+      <a class="s-link" href="/nightschool">Case study</a>
+    </div>
   </div>
   <div class="s-visual">
     <div class="s-screenshot"><img src="/screenshots/nightschool-ai.png" alt="Nightschool AI"></div>
