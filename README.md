@@ -3,7 +3,6 @@
 Single-page portfolio. AI enablement receipts.
 
 - Single-file `index.html`, no build step
-- Vercel project: `prj_H4KgcnZhmtkN5gvNF2xMwQP6BEkC` (`reid-chongs-projects`)
 - Design tokens preserved from prior `reidchong.com` consulting site
 - Screenshots in `public/screenshots/`
 
